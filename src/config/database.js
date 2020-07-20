@@ -13,7 +13,7 @@ module.exports = {
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
   define: {
-    timestamps: true,
+    timestamps: false,
     underscored: true,
     underscoredAll: true,
     freezeTableName: true,

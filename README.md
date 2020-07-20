@@ -1,4 +1,4 @@
-<h1>Sarilio`s Technology Keep CorP</h1>
+<h1>Sarilio`s Technology Keep Corp</h1>
 
 <p align="center">
 <image src=".github/logo.jpg"/></br>

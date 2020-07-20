@@ -1,18 +1,26 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('conta_bancaria', {
-      CONTA_BANCARIA_ID: {
+      id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      NUMERO_DO_BANCO: Sequelize.INTEGER,
-      TIPO_DE_CONTA: Sequelize.STRING(50),
-      AGENCIA: Sequelize.INTEGER,
-      NUMERO_DA_CONTA: Sequelize.INTEGER,
-      CREATED_AT: { type: Sequelize.DATE, allowNull: true },
-      UPDATED_AT: { type: Sequelize.DATE, allowNull: true },
+      numero_do_banco: { type: Sequelize.INTEGER, allowNull: false },
+      tipo_de_conta: { type: Sequelize.STRING, allowNull: false },
+      agencia: { type: Sequelize.INTEGER, allowNull: false },
+      numero_da_conta: { type: Sequelize.INTEGER, allowNull: false },
+      created_at: {
+        defaultValue: new Date(),
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        defaultValue: new Date(),
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
     });
   },
 

@@ -1,40 +1,48 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('cliente', {
-      CLIENTE_ID: {
+      id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
-        allowNull: false,
         primaryKey: true,
+        allowNull: false,
       },
 
-      STATUS: { type: Sequelize.BOOLEAN, defaultValue: false },
-      EMAIL: { type: Sequelize.STRING(100), unique: true },
-      SENHA_HASH: Sequelize.STRING(16),
-      TIPO_DE_CLIENTE: Sequelize.STRING,
+      status: { type: Sequelize.BOOLEAN, defaultValue: false },
+      email: { type: Sequelize.STRING(100), unique: true, allowNull: false },
+      senha_hash: { type: Sequelize.STRING, allowNull: false },
+      tipo_de_cliente: { type: Sequelize.STRING, allowNull: true },
 
-      CONTA_INTERNA_ID: {
+      conta_interna_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'conta_interna', key: 'CONTA_ID' },
+        references: { model: 'conta_interna', key: 'id' },
       },
 
-      ENDERECO_ID: {
+      endereco_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'endereco', key: 'ENDERECO_ID' },
+        references: { model: 'endereco', key: 'id' },
       },
 
-      CONTA_BANCARIA_ID: {
+      conta_bancaria_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'conta_bancaria', key: 'CONTA_BANCARIA_ID' },
+        references: { model: 'conta_bancaria', key: 'id' },
       },
 
-      REPRESENTANTE_ID: {
+      representante_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'representante', key: 'REPRESENTANTE_ID' },
+        references: { model: 'representante', key: 'id' },
       },
 
-      CREATED_AT: { type: Sequelize.DATE, allowNull: false },
-      UPDATED_AT: { type: Sequelize.DATE, allowNull: false },
+      created_at: {
+        defaultValue: new Date(),
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        defaultValue: new Date(),
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
     });
   },
 

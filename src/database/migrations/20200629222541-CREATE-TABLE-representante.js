@@ -1,20 +1,28 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('representante', {
-      REPRESENTANTE_ID: {
+      id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
         autoIncrement: true,
       },
-      NOME: Sequelize.STRING(150),
-      TIPO_DE_REPRESENTACAO: Sequelize.STRING(60),
-      CPF: { type: Sequelize.STRING(14), unique: true },
-      CREATED_AT: { type: Sequelize.DATE, allowNull: false },
-      UPDATED_AT: { type: Sequelize.DATE, allowNull: false },
-      ENDERECO_ID: {
+      nome: { type: Sequelize.STRING(150), allowNull: false },
+      tipo_de_representacao: { type: Sequelize.STRING(60), allowNull: false },
+      CPF: { type: Sequelize.STRING(14), unique: true, allowNull: false },
+      endereco_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'endereco', key: 'ENDERECO_ID' },
+        references: { model: 'endereco', key: 'id' },
+      },
+      created_at: {
+        defaultValue: new Date(),
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        defaultValue: new Date(),
+        type: Sequelize.DATE,
+        allowNull: false,
       },
     });
   },

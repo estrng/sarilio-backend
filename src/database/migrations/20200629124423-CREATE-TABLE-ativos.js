@@ -1,18 +1,29 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('ativos', {
-      ATIVO_ID: {
+      id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+        allowNull: false,
       },
-      NOME_DO_ATIVO: Sequelize.STRING(50),
-      VALOR: Sequelize.FLOAT,
-      COMISSAO: Sequelize.FLOAT,
-      QUANTIDADE_DISPONIVEL: Sequelize.FLOAT,
-      TIPO: Sequelize.STRING(60),
-      CREATED_AT: Sequelize.DATE,
-      UPDATED_AT: Sequelize.DATE,
+      nome_do_ativo: { type: Sequelize.STRING(50), allowNull: false },
+      valor: { type: Sequelize.FLOAT, allowNull: false },
+      comissao: { type: Sequelize.FLOAT, allowNull: false },
+      quantidade_disponivel: { type: Sequelize.FLOAT, allowNull: false },
+      tipo: Sequelize.STRING(60),
+
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: new Date(),
+      },
+
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: new Date(),
+      },
     });
   },
 

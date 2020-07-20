@@ -1,23 +1,32 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('funcionario', {
-      MATRICULA: {
+      id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      NOME: Sequelize.STRING(150),
-      CPF: { type: Sequelize.STRING(14), unique: true },
-      RG: Sequelize.STRING(20),
-      EMAIL: Sequelize.STRING(255),
-      SENHA_HASH: Sequelize.STRING(16),
-      ENDERECO_ID: {
+      nome: { type: Sequelize.STRING(150), allowNull: false },
+      cpf: { type: Sequelize.STRING(14), unique: true, allowNull: false },
+      rg: { type: Sequelize.STRING(20), allowNull: true },
+      email: { type: Sequelize.STRING(255), unique: true, allowNull: false },
+      senha_hash: { type: Sequelize.STRING(16), allowNull: false },
+      endereco_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'endereco', key: 'ENDERECO_ID' },
+        references: { model: 'endereco', key: 'id' },
+        allowNull: true,
       },
-      CREATED_AT: { type: Sequelize.DATE, allowNull: false },
-      UPDATED_AT: { type: Sequelize.DATE, allowNull: false },
+      created_at: {
+        defaultValue: new Date(),
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        defaultValue: new Date(),
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
     });
   },
 

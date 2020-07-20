@@ -1,22 +1,22 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('conta_ativos', {
-      CONTA_ATIVO_ID: {
+      id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
 
-      CONTA_ID: {
+      conta_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'conta_interna', key: 'CONTA_ID' },
+        references: { model: 'conta_interna', key: 'id' },
         allowNull: false,
       },
 
-      ATIVO_ID: {
+      ativo_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'ativos', key: 'ATIVO_ID' },
+        references: { model: 'ativos', key: 'id' },
         allowNull: false,
       },
     });

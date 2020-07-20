@@ -1,16 +1,17 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('cliente_pessoa_juridica', {
-      PJ_ID: {
+      id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+        allowNull: false,
       },
-      CNPJ: { type: Sequelize.STRING(18), unique: true },
-      NOME_FANTASIA: Sequelize.STRING(60),
-      RAZAO_SOCIAL: Sequelize.STRING(50),
-      INSCRICAO_ESTADUAL: Sequelize.STRING(13),
-      TELEFONE: Sequelize.STRING(14),
+      cnpj: { type: Sequelize.STRING(18), unique: true, allowNull: false },
+      nome_fantasia: { type: Sequelize.STRING(60), allowNull: true },
+      razao_social: { type: Sequelize.STRING(50), allowNull: false },
+      inscricao_estadual: { type: Sequelize.STRING(50), allowNull: true },
+      telefone: { type: Sequelize.STRING(14), allowNull: true },
     });
   },
 
