@@ -15,7 +15,7 @@ class ClienteController {
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails' });
-    } // validação do que contem dentro do Schema com o Body
+    } // NOTE Pensar uma util para essa função
 
     const clienteExiste = await Cliente.findOne({
       where: { email: req.body.email },

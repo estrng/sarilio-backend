@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-class Ativo extends Model {
+class Ativos extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -16,6 +16,6 @@ class Ativo extends Model {
   }
 }
 
-export default Ativo;
+export default Ativos;
 
 // DATABASE Model de Ativos

@@ -26,6 +26,13 @@ class Cliente extends Model {
     });
     return this;
   }
+
+  static associate(models) {
+    this.belongsTo(models.ContaInterna, {
+      foreignKey: 'conta_interna_id',
+      as: 'user',
+    });
+  }
 }
 
 export default Cliente;

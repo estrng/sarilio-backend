@@ -8,6 +8,7 @@ class Funcinario extends Model {
         cpf: Sequelize.STRING,
         rg: Sequelize.STRING,
         email: Sequelize.STRING,
+        senha: Sequelize.VIRTUAL,
         senha_hash: Sequelize.STRING,
         endereco_id: {
           type: Sequelize.INTEGER,
