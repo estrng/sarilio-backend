@@ -11,7 +11,6 @@ class Cliente extends Model {
         senha_hash: Sequelize.STRING,
         tipo_de_cliente: Sequelize.STRING,
 
-        conta_interna_id: Sequelize.INTEGER,
         endereco_id: Sequelize.INTEGER,
         conta_bancaria_id: Sequelize.INTEGER,
         representante_id: Sequelize.INTEGER,
@@ -30,8 +29,12 @@ class Cliente extends Model {
   static associate(models) {
     this.belongsTo(models.ContaInterna, {
       foreignKey: 'conta_interna_id',
-      as: 'user',
+      as: 'contaInterna',
     });
+  }
+
+  checkPassword(senha) {
+    return bcrypt.compare(senha, this.senha_hash);
   }
 }
 

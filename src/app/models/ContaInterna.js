@@ -12,6 +12,10 @@ class ContaInterna extends Model {
     );
     return this;
   }
+
+  static associate(models) {
+    this.hasOne(models.Cliente);
+  }
 }
 
 export default ContaInterna;

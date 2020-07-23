@@ -1,6 +1,7 @@
 import Sequelize, { Model } from 'sequelize';
+import bcrypt from 'bcryptjs';
 
-class Funcinario extends Model {
+class Funcionario extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -17,8 +18,18 @@ class Funcinario extends Model {
       },
       { sequelize }
     );
+
+    this.addHook('beforeSave', async funcionario => {
+      if (funcionario.senha) {
+        funcionario.senha_hash = await bcrypt.hash(funcionario.senha, 8);
+      }
+    });
     return this;
+  }
+
+  checkPassword(senha) {
+    return bcrypt.compare(senha, this.senha_hash);
   }
 }
 
-export default Funcinario;
+export default Funcionario;

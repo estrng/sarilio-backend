@@ -22,4 +22,3 @@ class ClientePessoaFisica extends Model {
 export default ClientePessoaFisica;
 
 // DATABASE Cliente pessoa fisica controller
-// NOTE lembresse de registrar esse classe no array de models

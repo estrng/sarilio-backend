@@ -4,9 +4,9 @@ import Funcionario from '../models/Funcionario';
 class FuncionarioController {
   async store(req, res) {
     const schema = Yup.object().shape({
-      nome: Yup.string(150).required(),
-      cpf: Yup.string(14).required(),
-      rg: Yup.string(20),
+      nome: Yup.string().required(),
+      cpf: Yup.string().required(),
+      rg: Yup.string(),
       email: Yup.string()
         .email()
         .required(),
@@ -20,7 +20,19 @@ class FuncionarioController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    return res.status(200).json('FuncionarioController');
+    const funcionarioExiste = await Funcionario.findOne({
+      where: { email: req.body.email },
+    });
+
+    if (funcionarioExiste) {
+      return res.status(400).json({ error: 'Employer already exists.' });
+    }
+
+    const { nome } = await Funcionario.create(req.body);
+
+    return res.status(200).json({
+      message: `${nome}, Bem vindo a Sarilio Keep Corp, pronto para por a mão na massa?`,
+    });
   }
 }
 

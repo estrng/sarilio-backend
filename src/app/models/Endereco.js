@@ -19,6 +19,10 @@ class Endereco extends Model {
     );
     return this;
   }
+
+  static associate(models) {
+    this.hasMany(models.Cliente, { foreignKey: 'endereco_id', as: 'endereco' });
+  }
 }
 
 export default Endereco;
