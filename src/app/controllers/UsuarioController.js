@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
-import Cliente from '../models/Cliente';
+import Usuario from '../models/Usuario';
 
-class ClienteController {
+class UsuarioController {
   async store(req, res) {
     const schema = Yup.object().shape({
       email: Yup.string()
@@ -10,32 +10,35 @@ class ClienteController {
       senha: Yup.string()
         .required()
         .min(6),
-      tipo_de_cliente: Yup.string(),
     });
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails' });
     } // NOTE Pensar uma util para essa função
 
-    const clienteExiste = await Cliente.findOne({
+    const usuarioExiste = await Usuario.findOne({
       where: { email: req.body.email },
     });
 
-    if (clienteExiste) {
+    if (usuarioExiste) {
       return res.status(400).json({ error: 'User already exists.' });
     }
 
-    const { email, senha_hash } = await Cliente.create(req.body);
+    try {
+      await Usuario.create(req.body);
+    } catch (error) {
+      return res
+        .status(401)
+        .json({ message: 'Algo deu errado! Veja o Erro: ', error });
+    }
 
     return res.status(200).json({
       message:
         'Sua requisição foi efetivada com sucesso! Aguarde aprovação de conta',
-      email,
-      senha_hash,
     });
   }
 }
 
-export default new ClienteController();
+export default new UsuarioController();
 
 // DATABASE - ClienteController

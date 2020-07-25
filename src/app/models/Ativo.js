@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-class Ativos extends Model {
+class Ativo extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -14,8 +14,13 @@ class Ativos extends Model {
     );
     return this;
   }
+
+  static associate(models) {
+    this.belongsTo(models.Categoria);
+    this.hasMany(models.OfertaAtivo, { foreignKey: 'ativo_id' });
+  }
 }
 
-export default Ativos;
+export default Ativo;
 
 // DATABASE Model de Ativos

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import * as Yup from 'yup';
-import Cliente from '../models/Cliente';
+import Usuario from '../models/Usuario';
 import authConfig from '../../config/auth';
 
 class SessionClienteController {
@@ -18,7 +18,7 @@ class SessionClienteController {
 
     const { email, senha } = req.body;
 
-    const cliente = await Cliente.findOne({
+    const cliente = await Usuario.findOne({
       where: { email },
     });
 

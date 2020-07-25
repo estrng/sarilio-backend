@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
-import ClientePessoaFisica from '../models/ClientePessoaFisica';
+import PF from '../models/PessoaFisica';
 
-class ClientePFController {
+class PFController {
   async store(req, res) {
     const schema = Yup.object().shape({
       cpf: Yup.string().required(),
@@ -20,7 +20,7 @@ class ClientePFController {
       return res.status(400).json({ error: 'Você não é um cliente!' });
     }
 
-    const clientePFExiste = await ClientePessoaFisica.findOne({
+    const clientePFExiste = await PF.findOne({
       where: { cpf: req.body.cpf },
     });
 
@@ -28,7 +28,7 @@ class ClientePFController {
       return res.status(400).json({ error: 'User already exists.' });
     }
 
-    const { email, senha_hash } = await ClientePessoaFisica.create(req.body);
+    const { email, senha_hash } = await PF.create(req.body);
 
     return res.status(200).json({
       message:
@@ -38,6 +38,6 @@ class ClientePFController {
     });
   }
 }
-export default new ClientePFController();
+export default new PFController();
 
 // DATABASE - ClientePFController

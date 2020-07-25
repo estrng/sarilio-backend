@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-class ClientePessoaJuridica extends Model {
+class PessoaJuridica extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -14,6 +14,10 @@ class ClientePessoaJuridica extends Model {
     );
     return this;
   }
+
+  static associate(models) {
+    this.hasOne(models.Usuario, { foreignKey: 'usuario_id' });
+  }
 }
 
-export default ClientePessoaJuridica;
+export default PessoaJuridica;

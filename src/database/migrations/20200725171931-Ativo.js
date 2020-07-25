@@ -1,33 +1,35 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('ativos', {
+    return queryInterface.createTable('Ativo', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      nome_do_ativo: { type: Sequelize.STRING(50), allowNull: false },
-      valor: { type: Sequelize.FLOAT, allowNull: false },
-      comissao: { type: Sequelize.FLOAT, allowNull: false },
-      quantidade_disponivel: { type: Sequelize.FLOAT, allowNull: false },
-      tipo: Sequelize.STRING(60),
 
-      created_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: new Date(),
+      nome_do_ativo: { type: Sequelize.STRING, allowNull: false },
+      valor: { type: Sequelize.FLOAT, allowNull: false },
+      quantidade_disponivel: { type: Sequelize.FLOAT, allowNull: false },
+
+      categoria_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'Categoria', key: 'id' },
       },
 
-      updated_at: {
-        type: Sequelize.DATE,
+      createdAt: {
         allowNull: false,
-        defaultValue: new Date(),
+        type: Sequelize.DATE,
+      },
+
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
       },
     });
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('ativos');
+    return queryInterface.dropTable('Ativo');
   },
 };

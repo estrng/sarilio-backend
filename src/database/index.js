@@ -1,32 +1,32 @@
 import 'dotenv/config';
 import Sequelize from 'sequelize';
 
-import Cliente from '../app/models/Cliente';
-import ClientePessoaFisica from '../app/models/ClientePessoaFisica';
-import ClientePessoaJuridica from '../app/models/ClientePessoaJuridica';
+import Usuario from '../app/models/Usuario';
+import PF from '../app/models/PessoaFisica';
+import PJ from '../app/models/PessoaJuridica';
 import Ativo from '../app/models/Ativo';
-import ContaAtivo from '../app/models/ContaAtivo';
+import OfertaAtivo from '../app/models/OfertaAtivo';
 import ContaBancaria from '../app/models/ContaBancaria';
 import ContaInterna from '../app/models/ContaInterna';
 import Endereco from '../app/models/Endereco';
-import Funcionario from '../app/models/Funcionario';
-import Representante from '../app/models/Representante';
 import LivroDeOferta from '../app/models/LivroDeOferta';
+import Categoria from '../app/models/Categoria';
+import Qualificacao from '../app/models/Qualificacao';
 
 import databaseConfig from '../config/database';
 
 const models = [
-  Cliente,
-  ClientePessoaFisica,
-  ClientePessoaJuridica,
+  Usuario,
+  PF,
+  PJ,
   Ativo,
-  ContaAtivo,
+  OfertaAtivo,
   ContaBancaria,
   ContaInterna,
   Endereco,
-  Funcionario,
-  Representante,
   LivroDeOferta,
+  Categoria,
+  Qualificacao,
 ];
 
 class Database {

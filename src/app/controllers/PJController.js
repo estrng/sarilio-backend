@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
-import ClientePessoaJuridica from '../models/ClientePessoaJuridica';
+import PJ from '../models/PessoaJuridica';
 
-class ClientePJController {
+class PJController {
   async store(req, res) {
     const schema = Yup.object().shape({
       cnpj: Yup.string()
@@ -25,6 +25,6 @@ class ClientePJController {
   }
 }
 
-export default new ClientePJController();
+export default new PJController();
 
 // DATABASE Cliente PJ controller

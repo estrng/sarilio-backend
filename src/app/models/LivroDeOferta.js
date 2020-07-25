@@ -16,6 +16,11 @@ class LivroDeOferta extends Model {
     );
     return this;
   }
+
+  static associate(models) {
+    this.belongsTo(models.ContaInterna);
+    this.hasMany(models.OfertaAtivo, { foreignKey: 'ordem_id' });
+  }
 }
 
 export default LivroDeOferta;

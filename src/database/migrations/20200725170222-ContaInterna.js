@@ -1,29 +1,34 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('conta_interna', {
+    return queryInterface.createTable('ContaInterna', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      titular: { type: Sequelize.STRING(60), allowNull: false },
+
       brl_saldo: Sequelize.FLOAT,
       ativo_brl_saldo: Sequelize.FLOAT,
-      created_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: new Date(),
+
+      usuario_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'Usuario', key: 'id' },
       },
-      updated_at: {
-        type: Sequelize.DATE,
+
+      createdAt: {
         allowNull: false,
-        defaultValue: new Date(),
+        type: Sequelize.DATE,
+      },
+
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
       },
     });
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('conta_interna');
+    return queryInterface.dropTable('ContaInterna');
   },
 };

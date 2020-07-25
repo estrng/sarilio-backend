@@ -13,6 +13,10 @@ class ContaBancaria extends Model {
     );
     return this;
   }
+
+  static associate(models) {
+    this.belongsTo(models.Usuario);
+  }
 }
 
 export default ContaBancaria;
