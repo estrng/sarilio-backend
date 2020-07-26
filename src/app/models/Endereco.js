@@ -21,7 +21,7 @@ class Endereco extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.Usuario, { foreignKey: 'usuario_id' });
+    this.belongsTo(models.Usuario, { foreignKey: 'usuario_id' });
   }
 }
 

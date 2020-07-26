@@ -18,26 +18,26 @@ class SessionClienteController {
 
     const { email, senha } = req.body;
 
-    const cliente = await Usuario.findOne({
+    const usuario = await Usuario.findOne({
       where: { email },
     });
 
-    if (!cliente) {
+    if (!usuario) {
       return res.status(401).json({ error: 'User not found' });
     }
 
-    if (!(await cliente.checkPassword(senha))) {
+    if (!(await usuario.checkPassword(senha))) {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
-    const { id } = cliente;
+    const { id } = usuario;
 
     return res.json({
-      cliente: {
+      usuario: {
         id,
         email,
       },
-      token: jwt.sign({ id, cliente: true }, authConfig.secret, {
+      token: jwt.sign({ id }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
       }),
     });

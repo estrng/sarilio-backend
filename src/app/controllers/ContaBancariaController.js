@@ -4,12 +4,12 @@ import ContaBancaria from '../models/ContaBancaria';
 class ContaBancariaController {
   async store(req, res) {
     const schema = Yup.object().shape({
+      cpf: Yup.string().required(),
+      titular: Yup.string().required(),
       numero_do_banco: Yup.number()
         .integer()
         .required(),
-      tipo_de_conta: Yup.number()
-        .integer()
-        .required(),
+      tipo_de_conta: Yup.string().required(),
       agencia: Yup.number()
         .integer()
         .required(),
@@ -22,10 +22,41 @@ class ContaBancariaController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    return res.status(200).json('ContaBacariaController');
+    const {
+      cpf,
+      titular,
+      numero_do_banco,
+      tipo_de_conta,
+      agencia,
+      numero_da_conta,
+    } = req.body;
+
+    const contaExiste = await ContaBancaria.findOne({
+      where: { numero_da_conta },
+    });
+
+    if (contaExiste) {
+      return res.status(400).json('Essa conta já existe!');
+    }
+
+    try {
+      await ContaBancaria.create({
+        cpf,
+        titular,
+        numero_do_banco,
+        tipo_de_conta,
+        agencia,
+        numero_da_conta,
+        usuario_id: req.usuarioId,
+      });
+    } catch (err) {
+      return res.status(400).json(err);
+    }
+    return res.status(200).json('Conta bancaria adicionada com sucesso!');
   }
 }
 
 export default new ContaBancariaController();
 
 // DATABASE ContaBancaria controller
+// NOTE Talvez teremos que mudar o tipo de dado do campo agencia pois a requisição JSON não aceita 0 a esquerda.

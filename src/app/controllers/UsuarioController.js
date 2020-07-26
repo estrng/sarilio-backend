@@ -23,22 +23,19 @@ class UsuarioController {
     if (usuarioExiste) {
       return res.status(400).json({ error: 'User already exists.' });
     }
-
     try {
       await Usuario.create(req.body);
-    } catch (error) {
-      return res
-        .status(401)
-        .json({ message: 'Algo deu errado! Veja o Erro: ', error });
-    }
 
-    return res.status(200).json({
-      message:
-        'Sua requisição foi efetivada com sucesso! Aguarde aprovação de conta',
-    });
+      return res.status(200).json({
+        message:
+          'Sua requisição foi efetivada com sucesso! Aguarde aprovação de conta',
+      });
+    } catch (error) {
+      return res.status(401).json(error);
+    }
   }
 }
 
 export default new UsuarioController();
 
-// DATABASE - ClienteController
+// DATABASE - UsuarioController

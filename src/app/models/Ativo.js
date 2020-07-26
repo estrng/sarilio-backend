@@ -16,11 +16,15 @@ class Ativo extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Categoria);
-    this.hasMany(models.OfertaAtivo, { foreignKey: 'ativo_id' });
+    this.hasMany(models.OfertaAtivo, {
+      foreignKey: 'ativo_id',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   }
 }
 
 export default Ativo;
 
 // DATABASE Model de Ativos
+// NOTE Talvez teremos que att o banco para controlar estoque de ativos.

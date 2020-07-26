@@ -14,8 +14,16 @@ class ContaInterna extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.Usuario, { foreignKey: 'usuario_id' });
-    this.hasMany(models.LivroDeOferta, { foreignKey: 'conta_interna_id' });
+    this.hasMany(models.LivroDeOferta, {
+      foreignKey: 'conta_interna_id',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
+    this.belongsTo(models.Usuario, {
+      foreignKey: 'usuario_id',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   }
 }
 

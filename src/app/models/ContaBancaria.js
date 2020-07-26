@@ -4,6 +4,8 @@ class ContaBancaria extends Model {
   static init(sequelize) {
     super.init(
       {
+        cpf: Sequelize.INTEGER,
+        titular: Sequelize.STRING,
         numero_do_banco: Sequelize.INTEGER,
         tipo_de_conta: Sequelize.STRING,
         agencia: Sequelize.INTEGER,
@@ -12,10 +14,6 @@ class ContaBancaria extends Model {
       { sequelize }
     );
     return this;
-  }
-
-  static associate(models) {
-    this.belongsTo(models.Usuario);
   }
 }
 

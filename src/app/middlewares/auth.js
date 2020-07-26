@@ -15,13 +15,9 @@ export default async (req, res, next) => {
 
     // NOTE achar uma maneira de fazer login do Funcionario
 
-    if (decoded.cliente) {
-      req.clienteId = decoded.id;
-    }
+    req.usuarioId = decoded.id;
 
-    if (decoded.funcionario) {
-      req.funcionarioId = decoded.id;
-    }
+    // NOTE talvez aqui de para fazer uma validação de usu, func e rep.
 
     return next();
   } catch (err) {

@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
 import PF from '../models/PessoaFisica';
 
 class PFController {
@@ -16,25 +17,41 @@ class PFController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    if (!req.clienteId) {
-      return res.status(400).json({ error: 'Você não é um cliente!' });
-    }
+    const {
+      cpf,
+      nome,
+      data_de_nascimento,
+      nome_da_mae,
+      celular,
+      genero,
+    } = req.body;
 
-    const clientePFExiste = await PF.findOne({
-      where: { cpf: req.body.cpf },
+    const existeRegistro = await PF.findOne({
+      where: {
+        [Op.or]: [{ cpf: req.body.cpf }, { usuario_id: req.usuarioId }],
+      },
     });
-
-    if (clientePFExiste) {
-      return res.status(400).json({ error: 'User already exists.' });
+    if (existeRegistro) {
+      return res.status(400).json({ error: 'Já existe um registro!' });
     }
 
-    const { email, senha_hash } = await PF.create(req.body);
+    try {
+      await PF.create({
+        cpf,
+        nome,
+        data_de_nascimento,
+        nome_da_mae,
+        celular,
+        genero,
+        usuario_id: req.usuarioId,
+      });
+    } catch (err) {
+      return res.status(400).json(err);
+    }
 
     return res.status(200).json({
       message:
         'Sua requisição foi efetivada com sucesso! Aguarde aprovação de conta',
-      email,
-      senha_hash,
     });
   }
 }

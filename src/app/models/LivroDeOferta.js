@@ -19,7 +19,11 @@ class LivroDeOferta extends Model {
 
   static associate(models) {
     this.belongsTo(models.ContaInterna);
-    this.hasMany(models.OfertaAtivo, { foreignKey: 'ordem_id' });
+    this.hasMany(models.OfertaAtivo, {
+      foreignKey: 'ordem_id',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   }
 }
 

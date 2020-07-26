@@ -1,35 +1,36 @@
-import { Model, DataTypes } from 'sequelize';
+import Sequelize, { Model } from 'sequelize';
 import bcrypt from 'bcryptjs';
 
 class Usuario extends Model {
   static init(sequelize) {
     super.init(
       {
-        email: { type: DataTypes.STRING, unique: true, allowNull: false },
-        senha_hash: { type: DataTypes.STRING, allowNull: false },
+        email: Sequelize.STRING,
+        senha: Sequelize.VIRTUAL,
+        senha_hash: Sequelize.STRING,
       },
-      { sequelize }
+      {
+        sequelize,
+      }
     );
-
-    this.addHook('beforeSave', async user => {
-      if (user.password) {
-        user.password_hash = await bcrypt.hash(user.password, 8);
+    this.addHook('beforeSave', async usuario => {
+      if (usuario.senha) {
+        usuario.senha_hash = await bcrypt.hash(usuario.senha, 8);
       }
     });
     return this;
   }
 
   static associate(models) {
-    this.belongsTo(models.PessoaFisica);
-    this.belongsTo(models.PessoaJuridica);
-    this.belongsTo(models.Qualificacao);
-    this.belongsTo(models.ContaInterna);
-    this.belongsTo(models.Endereco);
-    this.hasMany(models.ContaBancaria, { foreignKey: 'usuario_id' });
+    this.hasMany(models.ContaBancaria, {
+      foreignKey: 'usuario_id',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   }
 
   checkPassword(password) {
-    return bcrypt.compare(password, this.password_hash);
+    return bcrypt.compare(password, this.senha_hash);
   }
 }
 

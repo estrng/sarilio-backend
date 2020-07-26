@@ -12,7 +12,11 @@ class Categoria extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Ativo, { foreignKey: 'categoria_id' });
+    this.hasMany(models.Ativo, {
+      foreignKey: 'categoria_id',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   }
 }
 

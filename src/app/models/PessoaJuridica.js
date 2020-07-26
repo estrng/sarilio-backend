@@ -16,7 +16,11 @@ class PessoaJuridica extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.Usuario, { foreignKey: 'usuario_id' });
+    this.belongsTo(models.Usuario, {
+      foreignKey: 'usuario_id',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   }
 }
 
