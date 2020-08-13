@@ -8,28 +8,40 @@ routes.get('/', (req, res) => {
   return res.status(200).json('Server is runnig!');
 });
 
-// ROTAS USUARIO
+// USUARIO ROTAS
 routes.post('/usuario', Controllers.Usuario.store);
 
-// ROTAS Sessões
+// SESSOES ROTAS
 routes.post('/sessions', Controllers.Session.store);
 
+// MIDDLEWARE ROTAS
 routes.use(authMiddleware);
+
+// QUALIFICACAO ROTAS
 routes.post('/qualificacao', Controllers.Qualificacao.store);
 
-// ROTAS REGISTRO
+// REGISTRO ROTAS
 routes.post('/pj', Controllers.PJ.store);
 routes.post('/pf', Controllers.PF.store);
-// ROTAS ATIVO
 
-// ROTAS CONTA ATIVO
+// ATIVO ROTAS
+routes.post('/ativos', Controllers.Ativo.store);
 
-// ROTAS CONTA BANCARIA
+// CONTAATIVO ROTAS
+
+// ACCBANCARIA ROTAS
 routes.post('/accban', Controllers.ContaBancaria.store);
-// ROTAS CONTA INTERNA
 
-// ROTAS ENDERECO
+// CONTAINTERNA ROTAS
+routes.post('/accint', Controllers.ContaInterna.store);
 
-// ROTAS LIVRO DE OFERTAS
+// ENDERECO ROTAS
+routes.get('/end', Controllers.Endereco.store);
+
+// LIVRODEOFERTAS ROTAS
+routes.post('/book', Controllers.LivroDeOferta.store);
+
+// MMANUTENCAO Clientes
+routes.post('/manutencao', Controllers.Manutencao.updatedStatus);
 
 export default routes;

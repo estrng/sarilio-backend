@@ -6,9 +6,7 @@ class Ativo extends Model {
       {
         nome_do_ativo: Sequelize.STRING,
         valor: Sequelize.FLOAT,
-        comissao: Sequelize.FLOAT,
         quantidade_disponivel: Sequelize.FLOAT,
-        tipo: Sequelize.STRING,
       },
       { sequelize }
     );
@@ -26,5 +24,5 @@ class Ativo extends Model {
 
 export default Ativo;
 
-// DATABASE Model de Ativos
+// ATIVO Model de Ativos
 // NOTE Talvez teremos que att o banco para controlar estoque de ativos.

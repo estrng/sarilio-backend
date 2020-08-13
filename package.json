@@ -9,6 +9,7 @@
     "migrate": "sequelize db:migrate"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",

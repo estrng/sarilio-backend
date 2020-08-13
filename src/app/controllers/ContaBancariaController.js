@@ -59,4 +59,5 @@ class ContaBancariaController {
 export default new ContaBancariaController();
 
 // DATABASE ContaBancaria controller
-// NOTE Talvez teremos que mudar o tipo de dado do campo agencia pois a requisição JSON não aceita 0 a esquerda.
+/* NOTE Talvez teremos que mudar o tipo de dado do campo
+agencia pois a requisição JSON não aceita 0 a esquerda. */

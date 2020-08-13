@@ -27,6 +27,10 @@ class Usuario extends Model {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });
+
+    this.hasOne(models.ContaInterna, { foreignKey: 'usuario_id' });
+    /* NOTE talvez aqui vou ter que colocar um hasOne para podermos
+    fazer querys com include */
   }
 
   checkPassword(password) {

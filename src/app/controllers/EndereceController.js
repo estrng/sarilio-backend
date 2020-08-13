@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import Endereco from '../models/Endereco';
+import externalAPI from '../../services/externalAPI';
 
 class EnderecoController {
   async store(req, res) {
@@ -7,27 +8,56 @@ class EnderecoController {
       cep: Yup.string()
         .max(9)
         .required(),
-      logradouro: Yup.string().max(100),
-      numero: Yup.string().max(10),
-      complemento: Yup.string().max(60),
-      bairro: Yup.string().max(60),
-      localidade: Yup.string().max(100),
-      uf: Yup.string().max(2),
-      unidade: Yup.string().max(100),
-      ibge: Yup.string().max(8),
-      gia: Yup.string().max(5),
     });
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    // NOTE Pegar o CEP altomaticamente no front
+    const { cep, numero } = req.body;
 
-    return res.status(200).json('EnderecoController');
+    const usuario_id = req.usuarioId;
+
+    const existeEndereco = await Endereco.findOne({
+      where: { usuario_id: req.usuarioId },
+    });
+
+    if (existeEndereco) {
+      return res
+        .status(400)
+        .json({ message: 'Esse usuario já possui Endereço!' });
+    }
+
+    try {
+      const { data } = await externalAPI.get(`${cep}/json`);
+
+      const obj = {
+        cep: data.cep,
+        logradouro: data.logradouro,
+        complemento: data.complemento,
+        bairro: data.bairro,
+        localidade: data.localidade,
+        uf: data.uf,
+        unidade: data.unidade,
+        ibge: data.ibge,
+        gia: data.gia,
+        numero,
+        usuario_id,
+      };
+
+      await Endereco.create(obj);
+
+      return res.status(201).json();
+    } catch (error) {
+      return res.status(401).json(error);
+    }
   }
 }
 
 export default new EnderecoController();
 
-// DATABASE ContaBancaria controller
+// ENDERECO Controller
+
+// NOTE talvez a responsabilidade de consumir api de Cep seja do front end
+/* NOTE pensar em uma estrategia de validação do cep
+    e separar a requisição post da get do cep */

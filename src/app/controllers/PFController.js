@@ -1,9 +1,11 @@
 import * as Yup from 'yup';
-import { Op } from 'sequelize';
+import sequelize, { Op } from 'sequelize';
 import PF from '../models/PessoaFisica';
 
 class PFController {
   async store(req, res) {
+    const trx = sequelize.transaction();
+
     const schema = Yup.object().shape({
       cpf: Yup.string().required(),
       nome: Yup.string().required(),
@@ -31,6 +33,7 @@ class PFController {
         [Op.or]: [{ cpf: req.body.cpf }, { usuario_id: req.usuarioId }],
       },
     });
+
     if (existeRegistro) {
       return res.status(400).json({ error: 'Já existe um registro!' });
     }
@@ -45,7 +48,10 @@ class PFController {
         genero,
         usuario_id: req.usuarioId,
       });
+
+      await trx.commit();
     } catch (err) {
+      await trx.rollback();
       return res.status(400).json(err);
     }
 

@@ -5,14 +5,14 @@ class QualificacaoController {
   async store(req, res) {
     const schema = Yup.object().shape({
       tipo: Yup.string().required(),
-      status: Yup.string().default('false'),
+      status: Yup.string(),
     });
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const { tipo, status } = req.body;
+    const { tipo } = req.body;
 
     const usuario_id = req.usuarioId;
 
@@ -27,10 +27,15 @@ class QualificacaoController {
     }
 
     try {
-      await Qualificacao.create({ tipo, status, usuario_id });
-      return res
-        .status(200)
-        .json(`Muito bem você se classificou como: ${tipo}`);
+      if (tipo === 'Funcionario') {
+        const obj = { tipo, status: 'Ativo', usuario_id };
+
+        await Qualificacao.create(obj);
+        return res.status(201).json();
+      }
+
+      await Qualificacao.create({ tipo, status: 'Inativo', usuario_id });
+      return res.status(201).json();
     } catch (error) {
       return res.status(401).json(error);
     }

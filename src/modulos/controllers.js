@@ -10,6 +10,7 @@ import Endereco from '../app/controllers/EndereceController';
 import LivroDeOferta from '../app/controllers/LivroDeOfertaController';
 import Categoria from '../app/controllers/CategoriaController';
 import Qualificacao from '../app/controllers/QualificacaoController';
+import Manutencao from '../app/controllers/ManutencaoControlller';
 
 export default {
   ContaInterna,
@@ -24,4 +25,5 @@ export default {
   Endereco,
   Categoria,
   Qualificacao,
+  Manutencao,
 };
