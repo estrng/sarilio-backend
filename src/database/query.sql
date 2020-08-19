@@ -30,7 +30,7 @@ SELECT TOP (1000) [id]
 
 /* Qualidicação */
 
-SELECT Usuario.id, Usuario.email, Qualificacao.tipo, Qualificacao.usuario_id, Qualificacao.[status] 
+SELECT Usuario.id, Usuario.email, Qualificacao.tipo, Qualificacao.usuario_id, Qualificacao.[status]
 FROM Usuario
 INNER JOIN Qualificacao ON Usuario.id = Qualificacao.usuario_id
 /* WHERE Qualificacao.tipo = 'Funcionario' */
@@ -45,7 +45,7 @@ SELECT TOP (1000) [id]
       ,[createdAt]
       ,[updatedAt]
   FROM [sariliodev].[dbo].[Qualificacao]
-  
+
 SELECT usuario_id FROM [dbo].[Qualificacao]
 WHERE tipo = 'Funcionario'
 GO
@@ -53,7 +53,7 @@ GO
 -- Delete rows from table '[Qualificacao]' in schema '[dbo]'
 DELETE FROM [dbo].[Qualificacao]
 WHERE usuario_id = 3 AND [status] = 'Inativo'
-GO 
+GO
 
 
 /* Pessoa Juridica */
@@ -69,7 +69,7 @@ SELECT TOP (1000) [id]
       ,[updatedAt]
   FROM [sariliodev].[dbo].[PessoaJuridica]
 
-  SELECT * FROM [dbo].[Qualificacao], [dbo].[PessoaFisica] 
+  SELECT * FROM [dbo].[Qualificacao], [dbo].[PessoaFisica]
   WHERE tipo = 'Cliente'
   GO
 
@@ -127,3 +127,17 @@ SELECT TOP (10) [id]
       ,[updatedAt]
   FROM [sariliodev].[dbo].[Ativo]
   WHERE nome_do_ativo ='SarilioCoin'
+
+/* LivroDeOfertas */
+
+SELECT TOP (1000) [id]
+      ,[tipo_de_ordem]
+      ,[preco_limite]
+      ,[valor_total]
+      ,[comissao]
+      ,[quantidade]
+      ,[status]
+      ,[conta_interna_id]
+      ,[createdAt]
+      ,[updatedAt]
+  FROM [sariliodev].[dbo].[LivroDeOferta]

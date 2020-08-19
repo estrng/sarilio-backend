@@ -1,8 +1,8 @@
 import * as Yup from 'yup';
 import LivroDeOferta from '../models/LivroDeOferta';
-import Qualificacao from '../models/Qualificacao';
 import ContaInterna from '../models/ContaInterna';
-import Ativo from '../models/Ativo';
+import GetEntityById from '../../utils/functions/getEntityById';
+import getValorTotalDaOrdem from '../../utils/calculos/calc';
 
 class LivroDeOfertaController {
   async store(req, res) {
@@ -26,13 +26,8 @@ class LivroDeOfertaController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    // Verifica a qualificação do Cliente
-    const { tipo } = await Qualificacao.findOne({
-      where: { usuario_id: req.usuarioId },
-    });
-
-    if (tipo === 'Funcionario') {
-      return res.status(400).json('Você não pode realizar essa operação');
+    if (!(await GetEntityById.getTipoQualificacao(req.usuarioId))) {
+      return res.status(401).json('Não pode realizar essa operação!');
     }
 
     const {
@@ -44,22 +39,13 @@ class LivroDeOfertaController {
       status,
     } = req.body;
 
-    const valor_total = quantidade * preco_limite;
+    const valor_total = getValorTotalDaOrdem(quantidade, preco_limite);
 
-    const data = await Ativo.findOne({
-      where: { nome_do_ativo: req.body.ativo },
-    });
-
-    const { valor, quantidade_disponivel } = data;
-
-    if (quantidade_disponivel === 0) {
-      return res.status(400).json('Ativo não disponivel');
+    if ((await GetEntityById.getDadosDoAtivo(ativo, quantidade)) > 0) {
+      return res.status(401).json('Operação indisponivel!');
     }
 
-    if (quantidade > quantidade_disponivel) {
-      return res.status(400).json('Quantidade indisponivel');
-    }
-
+    parei aqui!!
     /* COnta interna */
 
     const conta = await ContaInterna.findOne({
@@ -73,6 +59,13 @@ class LivroDeOfertaController {
     }
 
     if (tipo_de_ordem === 'Compra') {
+      conta.brl_saldo -= valor_total;
+
+      try {
+        /* await ContaInterna.update(conta); */
+      } catch (error) {
+        return res.status(400).json('Supostamente nunca era para chegar aqui!');
+      }
       /* TODO Deduzir quantidade do ativo */
     }
 
@@ -82,18 +75,23 @@ class LivroDeOfertaController {
         .json('O valor da ordem não pode ser menor que o valor atual do ativo');
     }
 
-    /* await LivroDeOferta.create(obj); */
-
-    return res.status(201).json({
+    /* const obj = {
       tipo_de_ordem,
-      ativo,
       preco_limite,
-      comissao,
       valor_total,
+      comissao,
       quantidade,
       status,
-      data,
-    });
+      conta_interna_id,
+    }; */
+
+    try {
+      /* await LivroDeOferta.create(obj); */
+    } catch (error) {
+      return res.status(401).json(error);
+    }
+
+    return res.status(201).json('Requisição adicionada ao BOOK!');
   }
 }
 
