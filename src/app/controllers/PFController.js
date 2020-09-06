@@ -1,11 +1,10 @@
 import * as Yup from 'yup';
-import sequelize, { Op } from 'sequelize';
+import { Op } from 'sequelize';
 import PF from '../models/PessoaFisica';
+import getEntityById from '../../utils/functions/getEntityById';
 
 class PFController {
   async store(req, res) {
-    const trx = sequelize.transaction();
-
     const schema = Yup.object().shape({
       cpf: Yup.string().required(),
       nome: Yup.string().required(),
@@ -39,6 +38,7 @@ class PFController {
     }
 
     try {
+      // NOTE trabalhar uma transaction para setar status inativo!
       await PF.create({
         cpf,
         nome,
@@ -49,16 +49,13 @@ class PFController {
         usuario_id: req.usuarioId,
       });
 
-      await trx.commit();
+      return res.status(200).json({
+        message:
+          'Sua requisição foi efetivada com sucesso! Aguarde aprovação de conta',
+      });
     } catch (err) {
-      await trx.rollback();
       return res.status(400).json(err);
     }
-
-    return res.status(200).json({
-      message:
-        'Sua requisição foi efetivada com sucesso! Aguarde aprovação de conta',
-    });
   }
 }
 export default new PFController();

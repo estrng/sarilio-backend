@@ -29,6 +29,10 @@ class Usuario extends Model {
     });
 
     this.hasOne(models.ContaInterna, { foreignKey: 'usuario_id' });
+    this.hasOne(models.PessoaFisica, { foreignKey: 'usuario_id' });
+    this.hasOne(models.PessoaJuridica, { foreignKey: 'usuario_id' });
+    this.hasOne(models.Qualificacao, { foreignKey: 'usuario_id' });
+    this.hasOne(models.Endereco, { foreignKey: 'usuario_id' });
     /* NOTE talvez aqui vou ter que colocar um hasOne para podermos
     fazer querys com include */
   }

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import Qualificacao from '../../app/models/Qualificacao';
 import Ativo from '../../app/models/Ativo';
 
@@ -14,7 +15,7 @@ class GetEntetityById {
   }
 
   async getDadosDoAtivo(ativo, quantidade) {
-    const { valor, quantidade_disponivel } = await Ativo.findOne({
+    const { quantidade_disponivel } = await Ativo.findOne({
       where: { nome_do_ativo: ativo },
     });
 
@@ -23,16 +24,6 @@ class GetEntetityById {
     quantidade_disponivel === 0 ? (res = 1) : res;
 
     quantidade > quantidade_disponivel ? (res += 1) : res;
-
-    /* if (quantidade_disponivel === 0) {
-      res = 1;
-      return res;
-    }
-    */
-    /*
-    if (quantidade > quantidade_disponivel) {
-      return res.status(400).json('Quantidade indisponivel');
-    } */
 
     return res;
   }

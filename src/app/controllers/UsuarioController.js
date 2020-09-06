@@ -1,5 +1,10 @@
 import * as Yup from 'yup';
 import Usuario from '../models/Usuario';
+import Qualificacao from '../models/Qualificacao';
+import PessoaFisica from '../models/PessoaFisica';
+import ContaInterna from '../models/ContaInterna';
+import Endereco from '../models/Endereco';
+import getEntityById from '../../utils/functions/getEntityById';
 
 class UsuarioController {
   async store(req, res) {
@@ -33,6 +38,41 @@ class UsuarioController {
     } catch (error) {
       return res.status(401).json(error);
     }
+  }
+
+  async index(req, res) {
+    const { id } = req.query;
+
+    const qualificacao = await getEntityById.getTipoQualificacao(req.usuarioId);
+
+    if (qualificacao) {
+      return res.status(401).json('Not possible');
+    }
+
+    const info = await Usuario.findByPk(id, {
+      attributes: ['id', 'email'],
+      include: [
+        { model: PessoaFisica, attributes: ['nome'] },
+        { model: Qualificacao, attributes: ['tipo', 'status'] },
+        {
+          model: ContaInterna,
+          attributes: ['id', 'brl_saldo', 'ativo_brl_saldo'],
+        },
+        {
+          model: Endereco,
+          attributes: [
+            'cep',
+            'logradouro',
+            'numero',
+            'complemento',
+            'bairro',
+            'localidade',
+            'uf',
+          ],
+        },
+      ],
+    });
+    return res.status(200).json(info);
   }
 }
 

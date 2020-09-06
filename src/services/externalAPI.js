@@ -5,3 +5,4 @@ const externalAPI = axios.create({
 });
 
 export default externalAPI;
+// NOTE talvez isso aqui seja responsabildiade do FRONTEND

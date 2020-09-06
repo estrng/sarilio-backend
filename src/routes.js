@@ -16,6 +16,7 @@ routes.post('/sessions', Controllers.Session.store);
 
 // MIDDLEWARE ROTAS
 routes.use(authMiddleware);
+routes.get('/info', Controllers.Usuario.index);
 
 // QUALIFICACAO ROTAS
 routes.post('/qualificacao', Controllers.Qualificacao.store);
@@ -26,6 +27,8 @@ routes.post('/pf', Controllers.PF.store);
 
 // ATIVO ROTAS
 routes.post('/ativos', Controllers.Ativo.store);
+routes.get('/ativos', Controllers.Ativo.index);
+routes.put('/ativos', Controllers.Ativo.update);
 
 // CONTAATIVO ROTAS
 
@@ -41,7 +44,10 @@ routes.get('/end', Controllers.Endereco.store);
 // LIVRODEOFERTAS ROTAS
 routes.post('/book', Controllers.LivroDeOferta.store);
 
-// MMANUTENCAO Clientes
+// MANUTENCAO Clientes
 routes.post('/manutencao', Controllers.Manutencao.updatedStatus);
+
+// CATEGORIA ROTAS
+routes.post('/coincat', Controllers.Categoria.store);
 
 export default routes;

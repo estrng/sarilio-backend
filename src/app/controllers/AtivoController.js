@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import Ativos from '../models/Ativo';
 import Qualificacao from '../models/Qualificacao';
+import Categoria from '../models/Categoria';
 
 class AtivoController {
   async store(req, res) {
@@ -48,6 +49,23 @@ class AtivoController {
     } catch (err) {
       return res.status(400).json(err);
     }
+  }
+
+  async index(req, res) {
+    const ativo = await Ativos.findAll({
+      attributes: ['nome_do_ativo', 'quantidade_disponivel', 'valor'],
+      include: {
+        model: Categoria,
+        as: 'Categoria',
+        attributes: ['descricao'],
+      },
+    });
+
+    return res.status(200).json(ativo);
+  }
+
+  async update(req, res) {
+    // NOTE Fazer update do ativo aqui!
   }
 }
 

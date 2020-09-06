@@ -45,7 +45,7 @@ class LivroDeOfertaController {
       return res.status(401).json('Operação indisponivel!');
     }
 
-    parei aqui!!
+    // NOTE Continuar daqui
     /* COnta interna */
 
     const conta = await ContaInterna.findOne({

@@ -19,6 +19,10 @@ class Ativo extends Model {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });
+    this.belongsTo(models.Categoria, {
+      foreignKey: 'categoria_id',
+      as: 'Categoria',
+    });
   }
 }
 
