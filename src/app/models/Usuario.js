@@ -28,6 +28,12 @@ class Usuario extends Model {
       onUpdate: 'CASCADE',
     });
 
+    this.hasMany(models.ClienteAtivo, {
+      foreignKey: 'usuario_id',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
+
     this.hasOne(models.ContaInterna, { foreignKey: 'usuario_id' });
     this.hasOne(models.PessoaFisica, { foreignKey: 'usuario_id' });
     this.hasOne(models.PessoaJuridica, { foreignKey: 'usuario_id' });

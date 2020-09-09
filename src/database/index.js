@@ -12,6 +12,7 @@ import Endereco from '../app/models/Endereco';
 import LivroDeOferta from '../app/models/LivroDeOferta';
 import Categoria from '../app/models/Categoria';
 import Qualificacao from '../app/models/Qualificacao';
+import ClienteAtivo from '../app/models/ClienteAtivo';
 
 import databaseConfig from '../config/database';
 
@@ -27,6 +28,7 @@ const models = [
   LivroDeOferta,
   Categoria,
   Qualificacao,
+  ClienteAtivo,
 ];
 
 class Database {

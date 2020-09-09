@@ -11,6 +11,7 @@ import LivroDeOferta from '../app/controllers/LivroDeOfertaController';
 import Categoria from '../app/controllers/CategoriaController';
 import Qualificacao from '../app/controllers/QualificacaoController';
 import Manutencao from '../app/controllers/ManutencaoControlller';
+import CompraAtivo from '../app/controllers/CompraAtivoController';
 
 export default {
   ContaInterna,
@@ -26,4 +27,5 @@ export default {
   Categoria,
   Qualificacao,
   Manutencao,
+  CompraAtivo,
 };

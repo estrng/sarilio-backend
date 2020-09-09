@@ -5,6 +5,7 @@ import PessoaFisica from '../models/PessoaFisica';
 import ContaInterna from '../models/ContaInterna';
 import Endereco from '../models/Endereco';
 import getEntityById from '../../utils/functions/getEntityById';
+import ClienteAtivo from '../models/ClienteAtivo';
 
 class UsuarioController {
   async store(req, res) {
@@ -70,6 +71,7 @@ class UsuarioController {
             'uf',
           ],
         },
+        { model: ClienteAtivo },
       ],
     });
     return res.status(200).json(info);

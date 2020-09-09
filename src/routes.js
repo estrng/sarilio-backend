@@ -29,6 +29,8 @@ routes.post('/pf', Controllers.PF.store);
 routes.post('/ativos', Controllers.Ativo.store);
 routes.get('/ativos', Controllers.Ativo.index);
 routes.put('/ativos', Controllers.Ativo.update);
+// ATIVOS Cliente
+routes.post('/ask', Controllers.CompraAtivo.store);
 
 // CONTAATIVO ROTAS
 

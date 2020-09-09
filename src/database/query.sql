@@ -12,7 +12,7 @@ CREATE DATABASE sariliodev
 GO
 
 
-/* Usuaro */
+/* Usuario */
 
 SELECT TOP (1000) [id]
       ,[email]
@@ -154,6 +154,17 @@ SELECT TOP (1000) [id]
       ,[updatedAt]
   FROM [sariliodev].[dbo].[ContaInterna]
 
+  UPDATE [dbo].[ContaInterna]
+  SET [brl_saldo] = 100
+  WHERE id = 1
+  GO
+
+  UPDATE [dbo].[ContaInterna]
+  SET [ativo_brl_saldo] = 0
+  WHERE id = 1
+  GO
+
+
 /* Ativo  */
 
 SELECT TOP (10) [id]
@@ -167,6 +178,11 @@ SELECT TOP (10) [id]
   WHERE nome_do_ativo ='SarilioCoin'
 
 -- Update rows in table '[Ativo]' in schema '[dbo]'
+UPDATE [dbo].[Ativo]
+SET [nome_do_ativo] = 'EstrongCoin'
+WHERE id = 2
+GO
+
 UPDATE [dbo].[Ativo]
 SET [categoria_id] = 1
 WHERE id = 
@@ -186,6 +202,21 @@ SELECT TOP (1000) [id]
       ,[updatedAt]
   FROM [sariliodev].[dbo].[LivroDeOferta]
 
+/*Cliente Ativo*/
+
+SELECT TOP (1000) [id]
+      ,[nome]
+      ,[valor]
+      ,[quantidade]
+      ,[usuario_id]
+      ,[createdAt]
+      ,[updatedAt]
+  FROM [sariliodev].[dbo].[ClienteAtivo]
+
+-- Delete rows from table '[ClienteAtivo]' in schema '[dbo]'
+DELETE FROM [dbo].[ClienteAtivo]
+WHERE id = 11
+GO
 
 /* Categoria */
 
@@ -194,3 +225,9 @@ SELECT TOP (1000) [id]
       ,[createdAt]
       ,[updatedAt]
   FROM [sariliodev].[dbo].[Categoria]
+
+UPDATE [dbo].[Categoria]
+SET
+  [descricao] = 'Cripto Moeda'
+WHERE id = 1
+GO
