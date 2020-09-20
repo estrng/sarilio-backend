@@ -53,7 +53,7 @@ class UsuarioController {
     const info = await Usuario.findByPk(id, {
       attributes: ['id', 'email'],
       include: [
-        { model: PessoaFisica, attributes: ['nome'] },
+        { model: PessoaFisica, attributes: ['nome', 'cpf'] },
         { model: Qualificacao, attributes: ['tipo', 'status'] },
         {
           model: ContaInterna,

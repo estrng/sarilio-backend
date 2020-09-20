@@ -51,6 +51,7 @@ class AtivoController {
     }
   }
 
+  // ATIVO Inserção
   async index(req, res) {
     const ativo = await Ativos.findAll({
       attributes: ['nome_do_ativo', 'quantidade_disponivel', 'valor'],
@@ -63,10 +64,7 @@ class AtivoController {
 
     return res.status(200).json(ativo);
   }
-
-  async update(req, res) {
-    // NOTE Fazer update do ativo aqui!
-  }
+  // ATIVO Listagem
 }
 
 export default new AtivoController();

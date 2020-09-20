@@ -5,7 +5,7 @@ import Usuario from '../app/models/Usuario';
 import PF from '../app/models/PessoaFisica';
 import PJ from '../app/models/PessoaJuridica';
 import Ativo from '../app/models/Ativo';
-import OfertaAtivo from '../app/models/OfertaAtivo';
+import ContaAtivo from '../app/models/ContaAtivo';
 import ContaBancaria from '../app/models/ContaBancaria';
 import ContaInterna from '../app/models/ContaInterna';
 import Endereco from '../app/models/Endereco';
@@ -21,7 +21,7 @@ const models = [
   PF,
   PJ,
   Ativo,
-  OfertaAtivo,
+  ContaAtivo,
   ContaBancaria,
   ContaInterna,
   Endereco,

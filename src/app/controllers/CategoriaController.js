@@ -28,6 +28,7 @@ class CategoriaController {
       return res.status(401).json(error);
     }
   }
+  // CATEGORIA Inserção
 }
 
 export default new CategoriaController();

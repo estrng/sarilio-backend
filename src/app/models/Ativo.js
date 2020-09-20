@@ -14,7 +14,7 @@ class Ativo extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.OfertaAtivo, {
+    this.hasMany(models.ContaAtivo, {
       foreignKey: 'ativo_id',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',

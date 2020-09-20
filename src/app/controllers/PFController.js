@@ -1,7 +1,6 @@
 import * as Yup from 'yup';
 import { Op } from 'sequelize';
 import PF from '../models/PessoaFisica';
-import getEntityById from '../../utils/functions/getEntityById';
 
 class PFController {
   async store(req, res) {
