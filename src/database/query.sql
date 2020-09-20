@@ -24,13 +24,13 @@ FROM [sariliodev].[dbo].[Usuario]
 SELECT cpf  FROM PessoaFisica WHERE usuario_id = 3
 
 
-SELECT [Usuario].[id], [Usuario].[email], [Usuario].[senha_hash], [Usuario].[createdAt], [Usuario].[updatedAt], [ContaBancaria].[id] AS [ContaBancaria.id], [ContaBancaria].[cpf] AS [ContaBancaria.cpf], [ContaBancaria].[titular] AS [ContaBancaria.titular], [ContaBancaria].[numero_do_banco] AS [ContaBancaria.numero_do_banco], [ContaBancaria].[tipo_de_conta] AS [ContaBancaria.tipo_de_conta], [ContaBancaria].[agencia] AS [ContaBancaria.agencia], [ContaBancaria].[numero_da_conta] AS [ContaBancaria.numero_da_conta], [ContaBancaria].[createdAt] AS [ContaBancaria.createdAt], [ContaBancaria].[updatedAt] AS [ContaBancaria.updatedAt], [ContaBancaria].[usuario_id] AS [ContaBancaria.usuario_id], [ContaInterna].[id] AS [ContaInterna.id], [ContaInterna].[brl_saldo] AS [ContaInterna.brl_saldo], [ContaInterna].[ativo_brl_saldo] AS [ContaInterna.ativo_brl_saldo], [ContaInterna].[createdAt] AS [ContaInterna.createdAt], [ContaInterna].[updatedAt] AS [ContaInterna.updatedAt], [ContaInterna].[usuario_id] AS [ContaInterna.usuario_id], [PessoaFisica].[id] AS [PessoaFisica.id], [PessoaFisica].[cpf] AS [PessoaFisica.cpf], [PessoaFisica].[nome] AS [PessoaFisica.nome], [PessoaFisica].[data_de_nascimento] AS [PessoaFisica.data_de_nascimento], [PessoaFisica].[nome_da_mae] AS [PessoaFisica.nome_da_mae], [PessoaFisica].[celular] AS [PessoaFisica.celular], [PessoaFisica].[genero] AS [PessoaFisica.genero], [PessoaFisica].[createdAt] AS [PessoaFisica.createdAt], [PessoaFisica].[updatedAt] AS [PessoaFisica.updatedAt], [PessoaFisica].[usuario_id] AS [PessoaFisica.usuario_id], [Qualificacao].[id] AS [Qualificacao.id], [Qualificacao].[tipo] AS [Qualificacao.tipo], [Qualificacao].[status] AS [Qualificacao.status], [Qualificacao].[createdAt] AS [Qualificacao.createdAt], [Qualificacao].[updatedAt] AS [Qualificacao.updatedAt], [Qualificacao].[usuario_id] AS [Qualificacao.usuario_id], [Endereco].[id] AS [Endereco.id], [Endereco].[cep] AS [Endereco.cep], [Endereco].[logradouro] AS [Endereco.logradouro], [Endereco].[numero] AS [Endereco.numero], [Endereco].[complemento] AS [Endereco.complemento], [Endereco].[bairro] AS [Endereco.bairro], [Endereco].[localidade] AS [Endereco.localidade], [Endereco].[uf] AS [Endereco.uf], [Endereco].[unidade] AS [Endereco.unidade], [Endereco].[ibge] AS [Endereco.ibge], [Endereco].[gia] AS [Endereco.gia], [Endereco].[createdAt] AS [Endereco.createdAt], [Endereco].[updatedAt] AS [Endereco.updatedAt], [Endereco].[usuario_id] AS [Endereco.usuario_id] 
+SELECT [Usuario].[id], [Usuario].[email], [Usuario].[senha_hash], [Usuario].[createdAt], [Usuario].[updatedAt], [ContaBancaria].[id] AS [ContaBancaria.id], [ContaBancaria].[cpf] AS [ContaBancaria.cpf], [ContaBancaria].[titular] AS [ContaBancaria.titular], [ContaBancaria].[numero_do_banco] AS [ContaBancaria.numero_do_banco], [ContaBancaria].[tipo_de_conta] AS [ContaBancaria.tipo_de_conta], [ContaBancaria].[agencia] AS [ContaBancaria.agencia], [ContaBancaria].[numero_da_conta] AS [ContaBancaria.numero_da_conta], [ContaBancaria].[createdAt] AS [ContaBancaria.createdAt], [ContaBancaria].[updatedAt] AS [ContaBancaria.updatedAt], [ContaBancaria].[usuario_id] AS [ContaBancaria.usuario_id], [ContaInterna].[id] AS [ContaInterna.id], [ContaInterna].[brl_saldo] AS [ContaInterna.brl_saldo], [ContaInterna].[ativo_brl_saldo] AS [ContaInterna.ativo_brl_saldo], [ContaInterna].[createdAt] AS [ContaInterna.createdAt], [ContaInterna].[updatedAt] AS [ContaInterna.updatedAt], [ContaInterna].[usuario_id] AS [ContaInterna.usuario_id], [PessoaFisica].[id] AS [PessoaFisica.id], [PessoaFisica].[cpf] AS [PessoaFisica.cpf], [PessoaFisica].[nome] AS [PessoaFisica.nome], [PessoaFisica].[data_de_nascimento] AS [PessoaFisica.data_de_nascimento], [PessoaFisica].[nome_da_mae] AS [PessoaFisica.nome_da_mae], [PessoaFisica].[celular] AS [PessoaFisica.celular], [PessoaFisica].[genero] AS [PessoaFisica.genero], [PessoaFisica].[createdAt] AS [PessoaFisica.createdAt], [PessoaFisica].[updatedAt] AS [PessoaFisica.updatedAt], [PessoaFisica].[usuario_id] AS [PessoaFisica.usuario_id], [Qualificacao].[id] AS [Qualificacao.id], [Qualificacao].[tipo] AS [Qualificacao.tipo], [Qualificacao].[status] AS [Qualificacao.status], [Qualificacao].[createdAt] AS [Qualificacao.createdAt], [Qualificacao].[updatedAt] AS [Qualificacao.updatedAt], [Qualificacao].[usuario_id] AS [Qualificacao.usuario_id], [Endereco].[id] AS [Endereco.id], [Endereco].[cep] AS [Endereco.cep], [Endereco].[logradouro] AS [Endereco.logradouro], [Endereco].[numero] AS [Endereco.numero], [Endereco].[complemento] AS [Endereco.complemento], [Endereco].[bairro] AS [Endereco.bairro], [Endereco].[localidade] AS [Endereco.localidade], [Endereco].[uf] AS [Endereco.uf], [Endereco].[unidade] AS [Endereco.unidade], [Endereco].[ibge] AS [Endereco.ibge], [Endereco].[gia] AS [Endereco.gia], [Endereco].[createdAt] AS [Endereco.createdAt], [Endereco].[updatedAt] AS [Endereco.updatedAt], [Endereco].[usuario_id] AS [Endereco.usuario_id]
 FROM [Usuario]
-LEFT OUTER JOIN [ContaBancaria] AS [ContaBancaria] ON [Usuario].[id] = [ContaBancaria].[usuario_id] 
-LEFT OUTER JOIN [ContaInterna] AS [ContaInterna] ON [Usuario].[id] = [ContaInterna].[usuario_id] 
-LEFT OUTER JOIN [PessoaFisica] AS [PessoaFisica] ON [Usuario].[id] = [PessoaFisica].[usuario_id] 
-LEFT OUTER JOIN [Qualificacao] AS [Qualificacao] ON [Usuario].[id] = [Qualificacao].[usuario_id] 
-LEFT OUTER JOIN [Endereco] AS [Endereco] ON [Usuario].[id] = [Endereco].[usuario_id] 
+LEFT OUTER JOIN [ContaBancaria] AS [ContaBancaria] ON [Usuario].[id] = [ContaBancaria].[usuario_id]
+LEFT OUTER JOIN [ContaInterna] AS [ContaInterna] ON [Usuario].[id] = [ContaInterna].[usuario_id]
+LEFT OUTER JOIN [PessoaFisica] AS [PessoaFisica] ON [Usuario].[id] = [PessoaFisica].[usuario_id]
+LEFT OUTER JOIN [Qualificacao] AS [Qualificacao] ON [Usuario].[id] = [Qualificacao].[usuario_id]
+LEFT OUTER JOIN [Endereco] AS [Endereco] ON [Usuario].[id] = [Endereco].[usuario_id]
 WHERE [Usuario].[id] = N'1'
 
 
@@ -185,7 +185,7 @@ GO
 
 UPDATE [dbo].[Ativo]
 SET [categoria_id] = 1
-WHERE id = 
+WHERE id =
 GO
 
 /* LivroDeOfertas */
@@ -231,3 +231,17 @@ SET
   [descricao] = 'Cripto Moeda'
 WHERE id = 1
 GO
+
+BEGIN TRANSACTION;
+UPDATE [ClienteAtivo]
+SET [quantidade]=@0,[updatedAt]=@1
+OUTPUT INSERTED.* WHERE [id] = @2
+INSERT INTO [LivroDeOferta] ([tipo_de_ordem],[preco_limite],[valor_total],[comissao],[quantidade],[status],[createdAt],[updatedAt],[conta_interna_
+id])
+OUTPUT INSERTED.* VALUES (@0,@1,@2,@3,@4,@5,@6,@7,@8);
+SELECT [id], [nome_do_ativo], [valor], [quantidade_disponivel], [createdAt], [updatedAt], [categoria_id]
+FROM [Ativo]
+WHERE [Ativo].[nome_do_ativo] = N'SarilioCoin'
+ORDER BY [Ativo].[id] OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY;
+INSERT INTO [ContaAtivo] ([ordem_id],[ativo_id],[createdAt],[updatedAt]) OUTPUT INSERTED.* VALUES (@0,@1,@2,@3);
+COMMIT TRANSACTION;

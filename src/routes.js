@@ -44,6 +44,7 @@ routes.get('/end', Controllers.Endereco.store);
 
 // LIVRODEOFERTAS ROTAS
 routes.post('/book', Controllers.LivroDeOferta.store);
+routes.get('/book', Controllers.LivroDeOferta.index);
 
 // MANUTENCAO Clientes
 routes.post('/manutencao', Controllers.Manutencao.updatedStatus);

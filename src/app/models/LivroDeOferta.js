@@ -5,7 +5,6 @@ class LivroDeOferta extends Model {
     super.init(
       {
         tipo_de_ordem: Sequelize.STRING,
-        ativo: Sequelize.STRING,
         preco_limite: Sequelize.FLOAT,
         valor_total: Sequelize.FLOAT,
         comissao: Sequelize.FLOAT,
@@ -18,7 +17,11 @@ class LivroDeOferta extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.ContaInterna);
+    this.belongsTo(models.ContaInterna, {
+      foreignKey: 'conta_interna_id',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
     this.hasMany(models.ContaAtivo, {
       foreignKey: 'ordem_id',
       onDelete: 'CASCADE',

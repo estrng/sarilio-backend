@@ -4,6 +4,8 @@ import ClienteAtivo from '../models/ClienteAtivo';
 import db from '../../database';
 import LivroDeOferta from '../models/LivroDeOferta';
 import ContaAtivo from '../models/ContaAtivo';
+import ContaInterna from '../models/ContaInterna';
+import Ativo from '../models/Ativo';
 
 class LivroDeOfertaController {
   async store(req, res) {
@@ -26,7 +28,7 @@ class LivroDeOfertaController {
 
     // Deve possuir o ativo
     const ativo = await ClienteAtivo.findByPk(ativo_id, {
-      attributes: ['quantidade', 'valor'],
+      attributes: ['nome', 'quantidade', 'valor'],
     });
 
     if (!ativo) {
@@ -47,6 +49,11 @@ class LivroDeOfertaController {
     ativo.quantidade -= quantidade;
     ativo.valor = preco_limite;
 
+    // Encontra a conta interna
+    const contaInterna = await ContaInterna.findOne({
+      where: { usuario_id: req.usuarioId },
+    });
+
     const transaction = await db.connection.transaction();
     try {
       // NOTE A ordem deve pertecer a alguem
@@ -63,14 +70,20 @@ class LivroDeOfertaController {
           comissao,
           quantidade,
           status: 'Aberta',
+          conta_interna_id: contaInterna.id,
         },
         { transaction }
       );
 
+      const ativoGeral = await Ativo.findOne({
+        where: { nome_do_ativo: ativo.nome },
+        transaction,
+      });
+
       await ContaAtivo.create(
         {
           ordem_id: id,
-          ativo_id: Number(ativo_id),
+          ativo_id: ativoGeral.id,
         },
         { transaction }
       );
@@ -81,6 +94,11 @@ class LivroDeOfertaController {
       await transaction.rollback();
       return res.status(400).json(error);
     }
+  }
+
+  async index(req, res) {
+    const book = await LivroDeOferta.findAll({ include: ContaAtivo });
+    return res.status(200).json(book);
   }
 }
 export default new LivroDeOfertaController();
