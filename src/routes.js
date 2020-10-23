@@ -17,6 +17,7 @@ routes.post('/sessions', Controllers.Session.store);
 // MIDDLEWARE ROTAS
 routes.use(authMiddleware);
 routes.get('/info', Controllers.Usuario.index);
+routes.get('/usuario', Controllers.Usuario.show);
 
 // QUALIFICACAO ROTAS
 routes.post('/qualificacao', Controllers.Qualificacao.store);
@@ -28,10 +29,12 @@ routes.post('/pf', Controllers.PF.store);
 // ATIVO ROTAS
 routes.post('/ativos', Controllers.Ativo.store);
 routes.get('/ativos', Controllers.Ativo.index);
+
 // ATIVOS Cliente
 routes.post('/ask', Controllers.CompraAtivo.store);
 
 // CONTAATIVO ROTAS
+routes.post('/bind', Controllers.CompraAtivo.bind);
 
 // ACCBANCARIA ROTAS
 routes.post('/accban', Controllers.ContaBancaria.store);
@@ -51,5 +54,8 @@ routes.post('/manutencao', Controllers.Manutencao.updatedStatus);
 
 // CATEGORIA ROTAS
 routes.post('/coincat', Controllers.Categoria.store);
+
+// FAKEDEPOST fake deposito
+routes.post('/deposito', Controllers.FakeDeposito.store);
 
 export default routes;

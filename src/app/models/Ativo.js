@@ -14,11 +14,18 @@ class Ativo extends Model {
   }
 
   static associate(models) {
+    // teste de associacao por 3 tabela
+    this.belongsToMany(models.LivroDeOferta, {
+      through: 'ContaAtivo',
+      foreignKey: 'ativo_id',
+    });
+
     this.hasMany(models.ContaAtivo, {
       foreignKey: 'ativo_id',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });
+
     this.belongsTo(models.Categoria, {
       foreignKey: 'categoria_id',
       as: 'Categoria',

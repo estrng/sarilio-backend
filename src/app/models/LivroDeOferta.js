@@ -22,6 +22,12 @@ class LivroDeOferta extends Model {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });
+
+    this.belongsToMany(models.Ativo, {
+      through: 'ContaAtivo',
+      foreignKey: 'ordem_id',
+    });
+
     this.hasMany(models.ContaAtivo, {
       foreignKey: 'ordem_id',
       onDelete: 'CASCADE',

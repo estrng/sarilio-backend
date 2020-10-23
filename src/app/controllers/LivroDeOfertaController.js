@@ -23,6 +23,7 @@ class LivroDeOfertaController {
         error: 'Erro na validação de dados, verifique e tente novamente!',
       });
     }
+
     const { tipo_de_ordem, preco_limite, quantidade } = req.body;
     const { ativo_id } = req.query;
 
@@ -97,7 +98,9 @@ class LivroDeOfertaController {
   }
 
   async index(req, res) {
-    const book = await LivroDeOferta.findAll({ include: ContaAtivo });
+    const book = await LivroDeOferta.findAll({
+      include: Ativo,
+    });
     return res.status(200).json(book);
   }
 }

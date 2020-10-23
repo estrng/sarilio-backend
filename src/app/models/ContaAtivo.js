@@ -13,8 +13,16 @@ class ContaAtivo extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Ativo);
-    this.belongsTo(models.LivroDeOferta);
+    this.belongsTo(models.Ativo, {
+      foreignKey: 'ativo_id',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
+    this.belongsTo(models.LivroDeOferta, {
+      foreignKey: 'ordem_id',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   }
 }
 

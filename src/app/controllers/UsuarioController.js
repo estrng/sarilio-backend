@@ -76,6 +76,34 @@ class UsuarioController {
     });
     return res.status(200).json(info);
   }
+
+  async show(req, res) {
+    const info = await Usuario.findByPk(req.usuarioId, {
+      attributes: ['id', 'email'],
+      include: [
+        { model: PessoaFisica, attributes: ['nome', 'cpf'] },
+        { model: Qualificacao, attributes: ['tipo', 'status'] },
+        {
+          model: ContaInterna,
+          attributes: ['id', 'brl_saldo', 'ativo_brl_saldo'],
+        },
+        {
+          model: Endereco,
+          attributes: [
+            'cep',
+            'logradouro',
+            'numero',
+            'complemento',
+            'bairro',
+            'localidade',
+            'uf',
+          ],
+        },
+        { model: ClienteAtivo },
+      ],
+    });
+    return res.status(200).json(info);
+  }
 }
 
 export default new UsuarioController();

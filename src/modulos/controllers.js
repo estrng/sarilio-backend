@@ -12,6 +12,7 @@ import Categoria from '../app/controllers/CategoriaController';
 import Qualificacao from '../app/controllers/QualificacaoController';
 import Manutencao from '../app/controllers/ManutencaoControlller';
 import CompraAtivo from '../app/controllers/CompraAtivoController';
+import FakeDeposito from '../app/controllers/FakeDepositoController';
 
 export default {
   ContaInterna,
@@ -28,4 +29,5 @@ export default {
   Qualificacao,
   Manutencao,
   CompraAtivo,
+  FakeDeposito,
 };
