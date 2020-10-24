@@ -5,6 +5,7 @@ import Qualificacao from '../models/Qualificacao';
 import ClienteAtivo from '../models/ClienteAtivo';
 import ContaInterna from '../models/ContaInterna';
 import LivroDeOferta from '../models/LivroDeOferta';
+import Comissao from '../models/Comissao';
 
 class CompraAtivoController {
   // Verificação de dados
@@ -137,15 +138,9 @@ class CompraAtivoController {
     const { ordem_id } = req.query;
 
     const {
-      id,
       tipo_de_ordem,
-      preco_limite,
       valor_total,
       comissao,
-      quantidade,
-      statusAberta,
-      createdAt,
-      updatedAt,
       conta_interna_id,
     } = await LivroDeOferta.findByPk(ordem_id);
 
@@ -173,11 +168,29 @@ class CompraAtivoController {
         { brl_saldo },
         { where: { usuario_id: req.usuarioId }, transaction }
       );
-      /*
-    enviar valor para owner da ordem
-    passar comissão
-    Atualiza ordem
-    Adicona ao novo owner */
+
+      // enviar valor para owner da ordem
+      const contaDonoDaOrdem = ContaInterna.findByPk(conta_interna_id);
+
+      const saldo = contaDonoDaOrdem.brl_saldo + (valor_total - comissao);
+
+      await ContaInterna.update(
+        { brl_saldo: saldo },
+        { where: { id: contaDonoDaOrdem.id }, transaction }
+      );
+      // passar comissão
+      await Comissao.create(
+        {
+          ordem_id,
+          valor: comissao,
+        },
+        { transaction }
+      );
+      // Atualiza status da ordem
+      await LivroDeOferta.update(
+        { status: 'Executada', conta_interna_id: conta.id },
+        { where: { id: ordem_id }, transaction }
+      );
       await transaction.commit();
     } catch (error) {
       await transaction.rollback();

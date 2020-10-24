@@ -13,6 +13,7 @@ import LivroDeOferta from '../app/models/LivroDeOferta';
 import Categoria from '../app/models/Categoria';
 import Qualificacao from '../app/models/Qualificacao';
 import ClienteAtivo from '../app/models/ClienteAtivo';
+import Comissao from '../app/models/Comissao';
 
 import databaseConfig from '../config/database';
 
@@ -29,6 +30,7 @@ const models = [
   Categoria,
   Qualificacao,
   ClienteAtivo,
+  Comissao,
 ];
 
 class Database {

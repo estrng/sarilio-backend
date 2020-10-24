@@ -33,6 +33,12 @@ class LivroDeOferta extends Model {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });
+
+    this.hasOne(models.Comissao, {
+      foreignKey: 'ordem_id',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   }
 }
 
