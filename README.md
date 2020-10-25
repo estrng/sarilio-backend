@@ -12,9 +12,12 @@
 </p>
 
 <p align="center">
-<img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/estrongbelgier?logo=twitter&style=for-the-badge">
-
-<img alt="Linkedin" src="https://img.shields.io/badge/-LinkedIn-blue?style=for-the-badge&logo=Linkedin&logoColor=white">
+<a href="https://www.twitter.com/estrongbelgier" target="_blank" rel="noopener noreferrer">
+  <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/estrongbelgier?logo=twitter&style=for-the-badge">
+</a>
+<a href="https://www.linkedin.com/in/jose-ivan-ribeiro-de-oliveira-27596552/" target="_blank" rel="noopener noreferrer">
+  <img alt="Linkedin" src="https://img.shields.io/badge/-LinkedIn-blue?style=for-the-badge&logo=Linkedin&logoColor=white">
+</a>
 
 </p>
 
@@ -25,8 +28,7 @@
 ---
 
 ## Veja mais sobre APLICAÇÃO
-
-[Sarilio](https://www.sariliotkc.tech/)
+<a href="https://www.sariliotkc.tech/" target="_blank" rel="noopener noreferrer">sariliotkc.tech</a>
 
 ## About :memo:
 
