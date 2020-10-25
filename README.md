@@ -24,7 +24,9 @@
 
 ---
 
-Read portuguese version [HERE](README-Portuguese.md)
+## Veja mais sobre APLICAÇÃO
+
+[Sarilio](https://www.sariliotkc.tech/)
 
 ## About :memo:
 
