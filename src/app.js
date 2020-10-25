@@ -6,14 +6,11 @@ import 'express-async-errors';
 
 import routes from './routes';
 
-// Uncomment this line to enable database access
-// --------
-// import './database';
+import './database';
 
 class App {
   constructor() {
     this.server = express();
-
     this.middlewares();
     this.routes();
     this.exceptionHandler();
@@ -39,5 +36,4 @@ class App {
     });
   }
 }
-
 export default new App().server;

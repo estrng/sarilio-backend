@@ -1,28 +1,28 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('conta_ativos', {
-      CONTA_ATIVO_ID: {
+    return queryInterface.createTable('ContaAtivo', {
+      id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
 
-      CONTA_ID: {
+      ordem_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'conta_interna', key: 'CONTA_ID' },
+        references: { model: 'LivroDeOferta', key: 'id' },
         allowNull: false,
       },
 
-      ATIVO_ID: {
+      ativo_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'ativos', key: 'ATIVO_ID' },
+        references: { model: 'Ativo', key: 'id' },
         allowNull: false,
       },
     });
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('conta_ativos');
+    return queryInterface.dropTable('ContaAtivo');
   },
 };

@@ -1,32 +1,34 @@
-<h1>Sarilio`s Technology Keep CorP</h1>
+<h1>Sarilio`s Technology Keep Corp</h1>
 
 <p align="center">
-<image src=".github/logo.jpg"/></br>
+<image src=".github/Maozinha.svg" right='400' width='400'/></br>
 <label>Logo</label>
 </p>
 
 <p align="center">
 <a href="#about-memo">About</a>&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
 <a href="#tecnologies-rocket">Tecnologies</a>&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
-<a href="#how-to-contribute-">How to Contribute</a>&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
 <a href="#license-scroll">License</a>&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
 </p>
 
 <p align="center">
-<image src="https://img.shields.io/badge/Custom-shields%20here-red"/>
+<a href="https://www.twitter.com/estrongbelgier" target="_blank" rel="noopener noreferrer">
+  <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/estrongbelgier?logo=twitter&style=for-the-badge">
+</a>
+<a href="https://www.linkedin.com/in/jose-ivan-ribeiro-de-oliveira-27596552/" target="_blank" rel="noopener noreferrer">
+  <img alt="Linkedin" src="https://img.shields.io/badge/-LinkedIn-blue?style=for-the-badge&logo=Linkedin&logoColor=white">
+</a>
+
 </p>
 
-Click [here](https://shields.io/) and select shields for you project
-
-## Apresentation of Project :sparkles:
-
 <p align="center">
-<image src=".github/image-example.png" />
+<image src=".github/Logo.svg" />
 </p>
 
 ---
 
-Read portuguese version [HERE](README-Portuguese.md)
+## Veja mais sobre APLICAÇÃO
+<a href="https://www.sariliotkc.tech/" target="_blank" rel="noopener noreferrer">sariliotkc.tech</a>
 
 ## About :memo:
 
@@ -34,14 +36,12 @@ Brief description of project.
 
 ## Tecnologies :rocket:
 
-- <a href="#">List here</a>
-
-## How to Contribute 🤔
-
-- Fork this repository;
-- Create a branch with your feature: `git checkout -b my-feature`;
-- Commit your changes: `git commit -m 'feat: my new feature'`;
-- Push to your branch: `git push origin my-feature`.
+- [NodeJs](https://nodejs.org/en/)
+- [Javascrit](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
+- [Express](https://expressjs.com/pt-br/)
+- [Yup](https://github.com/jquense/yup)
+- [Cors](https://www.npmjs.com/package/cors)
+- [Sequelize](https://sequelize.org/)
 
 ## License :scroll:
 
@@ -49,4 +49,7 @@ Brief description of project.
 
 ---
 
-##### Made by 'Your name'(nickname) :wave:
+[@Estrongbelgier](https://github.com/Estrongbelgier) </br>
+
+<h2>Jose Ivan Ribeiro de Oliveira</h2>
+www.estrongbelgier.tech

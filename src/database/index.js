@@ -1,8 +1,37 @@
+import 'dotenv/config';
 import Sequelize from 'sequelize';
+
+import Usuario from '../app/models/Usuario';
+import PF from '../app/models/PessoaFisica';
+import PJ from '../app/models/PessoaJuridica';
+import Ativo from '../app/models/Ativo';
+import ContaAtivo from '../app/models/ContaAtivo';
+import ContaBancaria from '../app/models/ContaBancaria';
+import ContaInterna from '../app/models/ContaInterna';
+import Endereco from '../app/models/Endereco';
+import LivroDeOferta from '../app/models/LivroDeOferta';
+import Categoria from '../app/models/Categoria';
+import Qualificacao from '../app/models/Qualificacao';
+import ClienteAtivo from '../app/models/ClienteAtivo';
+import Comissao from '../app/models/Comissao';
 
 import databaseConfig from '../config/database';
 
-const models = [];
+const models = [
+  Usuario,
+  PF,
+  PJ,
+  Ativo,
+  ContaAtivo,
+  ContaBancaria,
+  ContaInterna,
+  Endereco,
+  LivroDeOferta,
+  Categoria,
+  Qualificacao,
+  ClienteAtivo,
+  Comissao,
+];
 
 class Database {
   constructor() {
@@ -19,3 +48,5 @@ class Database {
 }
 
 export default new Database();
+
+// DATABASE - Registro de models
