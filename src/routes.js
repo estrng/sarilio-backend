@@ -30,6 +30,7 @@ routes.post('/pf', Controllers.PF.store);
 routes.post('/ativos', Controllers.Ativo.store);
 routes.get('/ativos', Controllers.Ativo.index);
 routes.get('/meusativos', Controllers.ClienteAtivo.index);
+routes.get('/meusativos/:id', Controllers.ClienteAtivo.show);
 
 // ATIVOS Cliente
 routes.post('/ask', Controllers.CompraAtivo.store);
@@ -39,13 +40,16 @@ routes.post('/bind', Controllers.CompraAtivo.bind);
 
 // ACCBANCARIA ROTAS
 routes.post('/accban', Controllers.ContaBancaria.store);
+routes.get('/accban', Controllers.ContaBancaria.index);
+routes.post('/delaccban', Controllers.ContaBancaria.delete);
 
 // CONTAINTERNA ROTAS
 routes.post('/accint', Controllers.ContaInterna.store);
 routes.get('/accint', Controllers.ContaInterna.index);
 
 // ENDERECO ROTAS
-routes.get('/end', Controllers.Endereco.store);
+routes.post('/end', Controllers.Endereco.store);
+routes.get('/end', Controllers.Endereco.index);
 
 // LIVRODEOFERTAS ROTAS
 routes.post('/book', Controllers.LivroDeOferta.store);

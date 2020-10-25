@@ -22,8 +22,6 @@ class FakeDepositoController {
       where: { usuario_id: req.usuarioId },
     });
 
-    console.log(conta.dataValues);
-
     if (!conta) {
       return res.status(401).json({ massage: 'Not found' });
     }
@@ -31,8 +29,6 @@ class FakeDepositoController {
     const contaIterna = await ContaInterna.findOne({
       where: { usuario_id: req.usuarioId },
     });
-
-    console.log(contaIterna.dataValues);
 
     if (!contaIterna) {
       return res.status(401).json({ massage: 'Sem conta interna' });

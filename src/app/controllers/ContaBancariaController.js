@@ -54,6 +54,28 @@ class ContaBancariaController {
     }
     return res.status(200).json('Conta bancaria adicionada com sucesso!');
   }
+
+  async index(req, res) {
+    const conta = await ContaBancaria.findOne({
+      where: { usuario_id: req.usuarioId },
+    });
+
+    if (!conta) {
+      return res.status(200).json({ message: 'Nothing found!' });
+    }
+    return res.status(200).json(conta);
+  }
+
+  async delete(req, res) {
+    const id = req.usuarioId;
+
+    const conta = await ContaBancaria.destroy({ where: { usuario_id: id } });
+
+    if (!conta) {
+      return res.status(200).json({ message: 'Nothing to delete!' });
+    }
+    return res.status(200).json({ message: 'Deleted!' });
+  }
 }
 
 export default new ContaBancariaController();

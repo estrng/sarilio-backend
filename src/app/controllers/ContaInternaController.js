@@ -57,11 +57,17 @@ class ContaInternaController {
   }
 
   async index(req, res) {
+    const id = req.usuarioId;
+
     const conta = await ContaInterna.findOne({
-      where: { usuario_id: req.usuarioId },
+      where: { usuario_id: id },
     });
 
-    return res.status(200).json({ conta });
+    if (!conta) {
+      return res.status(200).json({ message: 'Nothing to show!' });
+    }
+
+    return res.status(200).json(conta);
   }
 }
 
