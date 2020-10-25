@@ -55,6 +55,14 @@ class ContaInternaController {
       return res.status(401).json(error);
     }
   }
+
+  async index(req, res) {
+    const conta = await ContaInterna.findOne({
+      where: { usuario_id: req.usuarioId },
+    });
+
+    return res.status(200).json({ conta });
+  }
 }
 
 export default new ContaInternaController();

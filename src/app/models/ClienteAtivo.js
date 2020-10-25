@@ -15,11 +15,6 @@ class ClienteAtivo extends Model {
 
   static associate(models) {
     this.belongsTo(models.Usuario, { foreignKey: 'usuario_id' });
-    this.hasMany(models.ContaAtivo, {
-      foreignKey: 'ativo_id',
-      onDelete: 'CASCADE',
-      onUpdate: 'CASCADE',
-    });
   }
 }
 

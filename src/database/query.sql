@@ -178,8 +178,8 @@ SELECT TOP (10) [id]
 
 -- Update rows in table '[Ativo]' in schema '[dbo]'
 UPDATE [dbo].[Ativo]
-SET [nome_do_ativo] = 'EstrongCoin'
-WHERE id = 2
+SET [quantidade_disponivel] = 1000
+WHERE id = 1
 GO
 
 UPDATE [dbo].[Ativo]

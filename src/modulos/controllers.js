@@ -13,6 +13,7 @@ import Qualificacao from '../app/controllers/QualificacaoController';
 import Manutencao from '../app/controllers/ManutencaoControlller';
 import CompraAtivo from '../app/controllers/CompraAtivoController';
 import FakeDeposito from '../app/controllers/FakeDepositoController';
+import ClienteAtivo from '../app/controllers/ClienteAtivoController';
 
 export default {
   ContaInterna,
@@ -30,4 +31,5 @@ export default {
   Manutencao,
   CompraAtivo,
   FakeDeposito,
+  ClienteAtivo,
 };

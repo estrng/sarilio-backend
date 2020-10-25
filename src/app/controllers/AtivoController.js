@@ -4,6 +4,8 @@ import Qualificacao from '../models/Qualificacao';
 import Categoria from '../models/Categoria';
 
 class AtivoController {
+  // ATIVO Inserção
+
   async store(req, res) {
     const schema = Yup.object().shape({
       nome_do_ativo: Yup.string()
@@ -51,10 +53,10 @@ class AtivoController {
     }
   }
 
-  // ATIVO Inserção
+  // ATIVO Listagem
   async index(req, res) {
     const ativo = await Ativos.findAll({
-      attributes: ['nome_do_ativo', 'quantidade_disponivel', 'valor'],
+      attributes: ['id', 'nome_do_ativo', 'quantidade_disponivel', 'valor'],
       include: {
         model: Categoria,
         as: 'Categoria',
@@ -64,7 +66,6 @@ class AtivoController {
 
     return res.status(200).json(ativo);
   }
-  // ATIVO Listagem
 }
 
 export default new AtivoController();

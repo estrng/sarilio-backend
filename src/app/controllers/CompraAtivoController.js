@@ -5,6 +5,7 @@ import Qualificacao from '../models/Qualificacao';
 import ClienteAtivo from '../models/ClienteAtivo';
 import ContaInterna from '../models/ContaInterna';
 import LivroDeOferta from '../models/LivroDeOferta';
+import ContaAtivo from '../models/ContaAtivo';
 import Comissao from '../models/Comissao';
 
 class CompraAtivoController {
@@ -30,9 +31,7 @@ class CompraAtivoController {
     }
 
     if (status === 'Inativo') {
-      return res
-        .status(400)
-        .json('Você ainda não está ativo! Fale que seu supervisor');
+      return res.status(400).json({ message: 'Você ainda não está ativo!' });
     }
 
     // Verifica se existe o Ativo
@@ -52,9 +51,7 @@ class CompraAtivoController {
     });
 
     if (conta.brl_saldo === 0 || conta.brl_saldo < valorTotal) {
-      return res
-        .status(400)
-        .json('Você não tem saldo suficiente para realizar essa operação');
+      return res.status(400).json({ message: 'No founds.' });
     }
 
     // Deduz da conta o valor da ordem
@@ -74,7 +71,7 @@ class CompraAtivoController {
           transaction,
         }
       );
-
+      // ATENCAO aqui
       const jaPossuiAtivo = await ClienteAtivo.findOne({
         where: { nome: ativo.nome_do_ativo },
         transaction,
@@ -122,31 +119,39 @@ class CompraAtivoController {
   async bind(req, res) {
     // Validação de dados
     const schema = Yup.object().shape({
-      tipo_de_ordem: Yup.string()
-        .max(50)
-        .required(),
-      preco_limite: Yup.number().required(),
-      quantidade: Yup.number().required(),
+      ordem_id: Yup.number().required(),
     });
 
-    if (!(await schema.isValid(req.body))) {
+    if (!(await schema.isValid(req.query))) {
       return res.status(400).json({
         error: 'Erro na validação de dados, verifique e tente novamente!',
       });
     }
+
     // Valor total
     const { ordem_id } = req.query;
 
-    const {
-      tipo_de_ordem,
-      valor_total,
-      comissao,
-      conta_interna_id,
-    } = await LivroDeOferta.findByPk(ordem_id);
+    const ordem = await LivroDeOferta.findByPk(ordem_id, {
+      attributes: [
+        'id',
+        'tipo_de_ordem',
+        'preco_limite',
+        'valor_total',
+        'comissao',
+        'quantidade',
+        'status',
+        'conta_interna_id',
+      ],
+    });
 
     // Verifica ordem venda
-    if (!tipo_de_ordem === 'Venda') {
+    if (!(ordem.tipo_de_ordem === 'Venda')) {
       return res.status(400).json({ message: 'Not possible!' });
+    }
+
+    // Verifica status
+    if (ordem.status === 'Executada') {
+      return res.status(400).json({ message: 'Ordem fechada' });
     }
 
     // Verica saldo
@@ -154,49 +159,114 @@ class CompraAtivoController {
       where: { usuario_id: req.usuarioId },
     });
 
-    if (conta.brl_saldo === 0 || conta.brl_saldo < valor_total) {
+    if (conta.brl_saldo === 0 || conta.brl_saldo < ordem.valor_total) {
       return res.status(400).json({ message: 'no fouds.' });
     }
 
     // Verifica quantidade
-    const brl_saldo = conta.brl_saldo - valor_total;
+    const brl_saldo = conta.brl_saldo - ordem.valor_total;
+    const ativo_brl_saldo = ordem.valor_total;
+    // owner
+    const contaDonoDaOrdem = await ContaInterna.findByPk(
+      ordem.conta_interna_id
+    );
+
+    const saldo =
+      contaDonoDaOrdem.brl_saldo + (ordem.valor_total - ordem.comissao);
+    const saldoAtivo = contaDonoDaOrdem.ativo_brl_saldo - ordem.valor_total;
+
+    // Ativo do cliente
+    const jaPossuiAtivo = await ClienteAtivo.findOne({
+      where: { usuario_id: req.usuarioId },
+    });
+
+    const ativoDoDonoDaOrdem = await ClienteAtivo.findOne({
+      where: { usuario_id: contaDonoDaOrdem.usuario_id },
+    });
+
+    ativoDoDonoDaOrdem.quantidade -= ordem.quantidade;
+    ativoDoDonoDaOrdem.valor -= ordem.valor_total;
+
+    const contaAtivo = await ContaAtivo.findOne({
+      where: { ordem_id: ordem.id },
+    });
+
+    const ativo = await Ativo.findByPk(contaAtivo.ativo_id);
 
     const transaction = await db.connection.transaction();
 
     try {
       await ContaInterna.update(
-        { brl_saldo },
+        { brl_saldo, ativo_brl_saldo },
         { where: { usuario_id: req.usuarioId }, transaction }
       );
 
       // enviar valor para owner da ordem
-      const contaDonoDaOrdem = ContaInterna.findByPk(conta_interna_id);
-
-      const saldo = contaDonoDaOrdem.brl_saldo + (valor_total - comissao);
-
       await ContaInterna.update(
-        { brl_saldo: saldo },
+        { brl_saldo: saldo, ativo_brl_saldo: saldoAtivo },
         { where: { id: contaDonoDaOrdem.id }, transaction }
       );
+
       // passar comissão
       await Comissao.create(
         {
           ordem_id,
-          valor: comissao,
+          valor: ordem.comissao,
         },
         { transaction }
       );
+
+      if (!jaPossuiAtivo) {
+        await ClienteAtivo.update(
+          {
+            quantidade: ativoDoDonoDaOrdem.quantidade,
+            valor: ativoDoDonoDaOrdem.valor,
+          },
+          { where: { usuario_id: contaDonoDaOrdem.usuario_id }, transaction }
+        );
+
+        await ClienteAtivo.create(
+          {
+            nome: ativo.nome_do_ativo,
+            valor: Number(ordem.valor_total),
+            quantidade: ordem.quantidade,
+            usuario_id: req.usuarioId,
+          },
+          { transaction }
+        );
+      } else {
+        await ClienteAtivo.update(
+          {
+            quantidade: ativoDoDonoDaOrdem.quantidade,
+            valor: ativoDoDonoDaOrdem.valor,
+          },
+          { where: { usuario_id: contaDonoDaOrdem.usuario_id }, transaction }
+        );
+
+        await ClienteAtivo.update(
+          {
+            valor: jaPossuiAtivo.valor + ordem.valorTotal,
+            quantidade: jaPossuiAtivo.quantidade + ordem.quantidade,
+          },
+          { where: { id: jaPossuiAtivo.id }, transaction }
+        );
+      }
+
       // Atualiza status da ordem
       await LivroDeOferta.update(
-        { status: 'Executada', conta_interna_id: conta.id },
+        {
+          status: 'Executada',
+          tipo_de_ordem: 'Compra',
+          conta_interna_id: conta.id,
+        },
         { where: { id: ordem_id }, transaction }
       );
       await transaction.commit();
+      return res.status(201).json({ message: 'Ordem Executada!' });
     } catch (error) {
       await transaction.rollback();
       return res.status(401).json(error);
     }
-    return res.status(201).json({ message: 'ok' });
   }
 }
 

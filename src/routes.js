@@ -29,6 +29,7 @@ routes.post('/pf', Controllers.PF.store);
 // ATIVO ROTAS
 routes.post('/ativos', Controllers.Ativo.store);
 routes.get('/ativos', Controllers.Ativo.index);
+routes.get('/meusativos', Controllers.ClienteAtivo.index);
 
 // ATIVOS Cliente
 routes.post('/ask', Controllers.CompraAtivo.store);
@@ -41,6 +42,7 @@ routes.post('/accban', Controllers.ContaBancaria.store);
 
 // CONTAINTERNA ROTAS
 routes.post('/accint', Controllers.ContaInterna.store);
+routes.get('/accint', Controllers.ContaInterna.index);
 
 // ENDERECO ROTAS
 routes.get('/end', Controllers.Endereco.store);
