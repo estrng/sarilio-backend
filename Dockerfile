@@ -8,9 +8,8 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
-RUN npm install
-RUN npm ci --only=production
-RUN npm build
+RUN yarn
+RUN yarn build
 # If you are building your code for production
 # RUN npm ci --only=production
 
@@ -18,4 +17,4 @@ RUN npm build
 COPY . .
 
 EXPOSE 8080
-CMD [ "npm", "start" ]
+CMD [ "node", "server.js" ]
