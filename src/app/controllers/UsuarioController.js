@@ -104,6 +104,19 @@ class UsuarioController {
     });
     return res.status(200).json(info);
   }
+
+  async count(req, res) {
+    try {
+      const usuarios = await Usuario.count();
+      return res
+        .status(200)
+        .json({ message: 'Servidor esta rodando!', usuarios });
+    } catch (error) {
+      return res
+        .status(400)
+        .json({ message: 'Não é possivel estabelecer contagem' });
+    }
+  }
 }
 
 export default new UsuarioController();

@@ -4,9 +4,7 @@ import Controllers from './modulos/controllers';
 
 const routes = new Router();
 
-routes.get('/', (req, res) => {
-  return res.status(200).json('Server is runnig!');
-});
+routes.get('/', Controllers.Usuario.count);
 
 // USUARIO ROTAS
 routes.post('/usuario', Controllers.Usuario.store);
