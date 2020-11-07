@@ -62,6 +62,7 @@ INNER JOIN Qualificacao ON Usuario.id = Qualificacao.usuario_id
 WHERE Qualificacao.usuario_id = 1
 ORDER BY [Qualificacao].[id]
 GO
+
 /* WHERE Qualificacao.tipo = 'Funcionario' */
 
 SELECT TOP (1000) [id]
