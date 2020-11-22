@@ -56,11 +56,9 @@ SELECT TOP (1000) [id]
 
 /* Qualidicação */
 
-SELECT Usuario.id, Usuario.email, Usuario.senha_hash, Qualificacao.tipo, Qualificacao.usuario_id, Qualificacao.[status]
+SELECT Usuario.id, Usuario.email, Usuario.senha_hash
 FROM Usuario
-INNER JOIN Qualificacao ON Usuario.id = Qualificacao.usuario_id
-WHERE Qualificacao.usuario_id = 1
-ORDER BY [Qualificacao].[id]
+WHERE Usuario.id = 1003 
 GO
 /* WHERE Qualificacao.tipo = 'Funcionario' */
 

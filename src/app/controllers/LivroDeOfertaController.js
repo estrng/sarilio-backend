@@ -99,7 +99,7 @@ class LivroDeOfertaController {
 
   async index(req, res) {
     const book = await LivroDeOferta.findAll({
-      include: Ativo,
+      where: { tipo_de_ordem: 'Venda', include: Ativo },
     });
     return res.status(200).json(book);
   }
