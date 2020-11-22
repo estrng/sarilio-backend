@@ -34,7 +34,7 @@ class FakeDepositoController {
       return res.status(401).json({ massage: 'Sem conta interna' });
     }
 
-    const deposito = contaIterna.brl_saldo + brl_saldo;
+    const deposito = contaIterna.brl_saldo + Number(brl_saldo);
 
     const transaction = await db.connection.transaction();
 
