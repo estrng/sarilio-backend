@@ -34,6 +34,8 @@ class FakeDepositoController {
       return res.status(401).json({ massage: 'Sem conta interna' });
     }
 
+    const deposito = contaIterna.brl_saldo + brl_saldo;
+
     const transaction = await db.connection.transaction();
 
     try {
@@ -43,8 +45,11 @@ class FakeDepositoController {
 
       if (cpf === conta.cpf) {
         await ContaInterna.update(
-          { brl_saldo },
-          { where: { usuario_id: req.usuarioId }, transaction }
+          { brl_saldo: deposito },
+          {
+            where: { usuario_id: req.usuarioId },
+            transaction,
+          }
         );
       }
       await transaction.commit();
