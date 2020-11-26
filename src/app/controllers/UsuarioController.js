@@ -78,31 +78,36 @@ class UsuarioController {
   }
 
   async show(req, res) {
-    const info = await Usuario.findByPk(req.usuarioId, {
-      attributes: ['id', 'email'],
-      include: [
-        { model: PessoaFisica, attributes: ['nome', 'cpf'] },
-        { model: Qualificacao, attributes: ['tipo', 'status'] },
-        {
-          model: ContaInterna,
-          attributes: ['id', 'brl_saldo', 'ativo_brl_saldo'],
-        },
-        {
-          model: Endereco,
-          attributes: [
-            'cep',
-            'logradouro',
-            'numero',
-            'complemento',
-            'bairro',
-            'localidade',
-            'uf',
-          ],
-        },
-        { model: ClienteAtivo },
-      ],
-    });
-    return res.status(200).json(info);
+    try {
+      const info = await Usuario.findByPk(req.usuarioId, {
+        attributes: ['id', 'email'],
+        include: [
+          { model: PessoaFisica, attributes: ['nome', 'cpf'] },
+          { model: Qualificacao, attributes: ['tipo', 'status'] },
+          {
+            model: ContaInterna,
+            attributes: ['id', 'brl_saldo', 'ativo_brl_saldo'],
+          },
+          {
+            model: Endereco,
+            attributes: [
+              'cep',
+              'logradouro',
+              'numero',
+              'complemento',
+              'bairro',
+              'localidade',
+              'uf',
+            ],
+          },
+          { model: ClienteAtivo },
+        ],
+      });
+
+      return res.status(200).json(info);
+    } catch (error) {
+      return res.status(404).json(error);
+    }
   }
 
   async count(req, res) {
